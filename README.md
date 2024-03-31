@@ -2,7 +2,7 @@
 
 A React-based web application that allows users to find medical centers in a specific state and city across the USA and book appointments.
 
-###
+#
 
 ## Features
 
@@ -32,11 +32,11 @@ A React-based web application that allows users to find medical centers in a spe
 
 - The application is fully responsive.
 
-###
+#
 
 ## Technologies
 
-#### Frontend: HTML, CSS, JavaScript, React
+#### Frontend: HTML, CSS, JavaScript, React, Tailwind CSS
 
 #
 
@@ -44,7 +44,7 @@ A React-based web application that allows users to find medical centers in a spe
 
 #### Welcome to this web app with React + Vite starter template! This template offers a streamlined setup for developing React applications using Vite.
 
-## Installation
+### Installation
 
 #### 1. Clone the Repository:
 
