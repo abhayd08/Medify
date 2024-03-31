@@ -1,16 +1,16 @@
 export default () => {
   return (
     <header>
-      <div className="py-[9px] font-normal px-2 text-sm text-center text-[#FFFFFF] bg-[var(--color-primary)]">
+      <div className="py-[9px] font-normal px-2 text-xs sm:text-sm text-center text-[#FFFFFF] bg-[var(--color-primary)]">
         The health and well-being of our patients and their health care team
         will always be our priority, so we follow the best practices for
         cleanliness.
       </div>
-      <nav className="pt-6 pb-8 px-3 flex justify-between items-center sm:justify-center sm:gap-[166px]">
+      <nav className="pt-6 pb-8 px-3 flex justify-between gap-[3rem] items-center max-w-[1170px] mx-auto">
         <a href="/">
           <img
             src="/assets/brand.png"
-            className="h-[27px] w-[92px]"
+            className="min-h-[27px] min-w-[92px]"
             alt="Brand"
           />
         </a>
