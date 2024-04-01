@@ -17,10 +17,23 @@ html {
   margin: 0;
 }
 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+}
+
 body {
   box-sizing: border-box;
   font-family: var(--font-primary);
   overflow-x: hidden;
+}
+
+@media (min-width: 974px) {
+  .heroSection {
+  justify-content: space-between;
+  }
 }
 
 @media (max-width: 300px) {
