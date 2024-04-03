@@ -33,7 +33,9 @@ export default () => {
       });
     } else {
       (async () => {
-        setBtnLoadingContent(<CircularProgress  aria-label="Loading..." color="secondary" />);
+        setBtnLoadingContent(
+          <CircularProgress aria-label="Loading..." color="secondary" />
+        );
         document
           .getElementById("fetchMedicalCentersBtn")
           .setAttribute("disabled", true);
@@ -48,7 +50,7 @@ export default () => {
           );
         } catch (error) {
           console.log(error);
-          setSelectedCity("City")
+          setSelectedCity("City");
           setMedicalCentersData([]);
           setSearchedLocation(null);
         } finally {
@@ -202,7 +204,6 @@ export default () => {
           />
         </button>
       </form>
-
       <div className="flex flex-col gap-[25px]">
         <h4 className="text-center font-medium text-[20px] leading-30px] tracking-[0.02em] text-[#102851]">
           You may be looking for

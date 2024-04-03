@@ -7,6 +7,12 @@ import axios from "axios";
 import MedifyContext from "../Contexts/MedifyContext";
 import { enqueueSnackbar } from "notistack";
 import DisplayMedicalCenters from "../DisplayMedicalCenters/DisplayMedicalCenters";
+import Features from "../Features/Features";
+import News from "../News/News";
+import Achievements from "../Achievements/Achievements";
+import FAQs from "../FAQs/FAQs";
+import DownloadSection from "../DownloadSection/DownloadSection";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   const [states, setStates] = useState([]);
@@ -69,12 +75,14 @@ const Home = () => {
         <Header />
         <HeroSection />
         <SearchCateorySelector />
-        {medicalCentersData.length > 0 ? (
-          <DisplayMedicalCenters />
-        ) : (
-          ""
-        )}
+        {medicalCentersData.length > 0 ? <DisplayMedicalCenters /> : ""}
       </MedifyContext.Provider>
+      <Features />
+      <News />
+      <Achievements />
+      <FAQs />
+      <DownloadSection />
+      <Footer />
     </>
   );
 };

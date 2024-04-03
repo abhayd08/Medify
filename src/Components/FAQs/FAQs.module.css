@@ -1,0 +1,35 @@
+@media (min-width: 570px) and (max-width: 640px) {
+  .heartImg {
+    right: 11px !important;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 570px) {
+  .heartImg {
+    right: 13px !important;
+  }
+}
+
+@media (min-width: 450px) and (max-width: 500px) {
+  .heartImg {
+    right: 7px !important;
+  }
+}
+
+@media (min-width: 410px) and (max-width: 450px) {
+  .heartImg {
+    right: 4px !important;
+  }
+}
+
+@media (min-width: 390px) and (max-width: 410px) {
+  .heartImg {
+    right: 2px !important;
+  }
+}
+
+@media (min-width: 340px) and (max-width: 390px) {
+  .heartImg {
+    right: 0 !important;
+  }
+}
