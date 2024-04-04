@@ -26,7 +26,7 @@ export default () => {
             <div className="hidden xl:flex cursor-pointer">Facilities</div>
           </div>
           <button className="w-[130px] border-0 outline-0 h-[40px] leading-[8px] rounded-[8px] text-center text-white bg-[var(--color-primary)] text-sm">
-            Login/Signup
+            My Bookings
           </button>
         </div>
       </nav>

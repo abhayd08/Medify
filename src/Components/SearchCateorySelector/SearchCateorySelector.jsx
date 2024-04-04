@@ -102,7 +102,7 @@ export default () => {
         <div
           className={`relative ${
             selectedState === "State" ? "text-[#9CA3AF]" : "text-[#11181C]"
-          } text-sm w-[285px] rounded-[8px] h-[50px]`}
+          } text-sm w-[300px] rounded-[8px] h-[50px]`}
         >
           <select
             value={selectedState}
@@ -143,7 +143,7 @@ export default () => {
         <div
           className={`relative ${
             selectedCity === "City" ? "text-[#9CA3AF]" : "text-[#11181C]"
-          } text-sm w-[285px] rounded-[8px] h-[50px]`}
+          } text-sm w-[300px] rounded-[8px] h-[50px]`}
         >
           <select
             value={selectedCity}
@@ -193,18 +193,18 @@ export default () => {
           aria-label="Search"
           className={`relative ${
             btnLoadingContent === "Search" ? "pl-5" : "pl-0"
-          }  focus:outline-white flex justify-center items-center text-center rounded-[8px] bg-[var(--color-primary)] text-sm w-[121px] h-[50px] text-white`}
+          }  focus:outline-white flex justify-center items-center text-center rounded-[8px] bg-[var(--color-primary)] text-sm w-[125px] h-[50px] text-white`}
         >
           {btnLoadingContent}
           <img
             id="btnSearchIcon"
-            className="absolute left-3 w-5 h-5 top-[50%] translate-y-[-50%]"
+            className="absolute left-4 w-5 h-5 top-[50%] translate-y-[-50%]"
             src="/assets/searchIcon2.png"
             alt="Search"
           />
         </button>
       </form>
-      <div className="flex flex-col gap-[25px]">
+      <div className="flex flex-col gap-[25px] px-2">
         <h4 className="text-center font-medium text-[20px] leading-30px] tracking-[0.02em] text-[#102851]">
           You may be looking for
         </h4>

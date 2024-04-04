@@ -13,6 +13,7 @@ import Achievements from "../Achievements/Achievements";
 import FAQs from "../FAQs/FAQs";
 import DownloadSection from "../DownloadSection/DownloadSection";
 import Footer from "../Footer/Footer";
+import SubHeader from "../SubHeader/SubHeader";
 
 const Home = () => {
   const [states, setStates] = useState([]);
@@ -22,9 +23,6 @@ const Home = () => {
   const [loadingContent, setLoadingContent] = useState("");
   const [medicalCentersData, setMedicalCentersData] = useState([]);
   const [searchedLocation, setSearchedLocation] = useState(null);
-  console.log(medicalCentersData);
-
-  console.log(selectedCity, selectedState, cities, states);
 
   useEffect(() => {
     (async () => {
@@ -73,6 +71,7 @@ const Home = () => {
         }}
       >
         <Header />
+        <SubHeader />
         <HeroSection />
         <SearchCateorySelector />
         {medicalCentersData.length > 0 ? <DisplayMedicalCenters /> : ""}

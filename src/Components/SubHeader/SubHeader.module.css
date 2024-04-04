@@ -1,0 +1,83 @@
+.coloredBox, .coloredBox2 {
+  background: linear-gradient(91.75deg, #2aa7ff 1.4%, #0c8ce6 100.57%);
+}
+
+.form, .form2 {
+  box-shadow: 6px 6px 35px 0px #1028511c;
+}
+
+@media (min-width: 1117px) {
+  .coloredBox {
+    height: 110px !important;
+  }
+
+  .coloredBox2 {
+    height: 110px !important;
+  }
+
+  .form {
+    margin-top: 3.7rem;
+  }
+
+  .form2 {
+    margin-top: 3.7rem;
+  }
+}
+
+@media (max-width: 1171px) {
+  .coloredBox2 {
+    height: 150px !important;
+  }
+
+  .form2 {
+    flex-wrap: wrap;
+    margin-top: 4rem;
+  }
+}
+
+@media (max-width: 1117px) {
+  .coloredBox {
+    height: 155px !important;
+  }
+
+  .container {
+    padding-top: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .form2 {
+    margin-top: 2.7rem;
+  }
+}
+
+@media (min-width: 810px) and (max-width: 825px) {
+  .coloredBox2 {
+    height: 190px !important;
+  }
+
+  .form2 {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 815px) {
+  .coloredBox2 {
+    height: 190px !important;
+  }
+}
+
+@media (max-width: 799px) {
+  .coloredBox {
+    height: 190px !important;
+  }
+
+  .form {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 300px) {
+  .form, .form2 {
+    min-width: 300px;
+  }
+}

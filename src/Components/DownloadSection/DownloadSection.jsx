@@ -16,7 +16,7 @@ export default () => {
             alt="Redirect"
           />
           <div className="max-w-[568px] flex-col flex gap-[50px] sm:gap-[23px]">
-            <h3 className="font-semibold max-w-[350px] text-[32px] sm:text-[48px] leading-[43px] sm:leading-[65px] text-[#1B3C74]">
+            <h3 className="font-semibold max-w-[350px] text-[32px] sm:text-[48px] leading-[47px] sm:leading-[65px] text-[#1B3C74]">
               Download the <span className="text-[#2AA7FF]">Medify</span> App
             </h3>
             <span className="font-[Roboto] text-sm sm:text-base sm:leading-[24px] font-bold text-[#414146]">
@@ -45,7 +45,7 @@ export default () => {
             Send SMS
           </button>
         </form>
-        <div className="flex justify-center mt-[50px] items-center flex-wrap gap-[26px]">
+        <div className="flex justify-center mt-[50px] items-center flex-wrap pb-[70px] gap-[26px]">
           <img
             className="cursor-pointer w-[200px] sm:w-[224px]"
             src="/assets/googlePlay.png"

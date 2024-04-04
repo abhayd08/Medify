@@ -27,7 +27,19 @@ select {
 body {
   box-sizing: border-box;
   font-family: var(--font-primary);
-  overflow-x: hidden;
+}
+
+.mySwiper {
+  /* max-width: 99vw !important; */
+  margin-left: 3rem !important;
+  margin-right: 3rem !important;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 @media (min-width: 974px) {
