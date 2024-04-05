@@ -1,8 +1,8 @@
 export default () => {
   return (
-    <div className="bg-[#1B3C74] flex flex-col gap-[65px] pt-[40px] pb-[10px] px-3">
-      <div className="flex justify-center pt-[39px] items-center gap-[180px] gap-y-[90px] flex-wrap">
-        <div className="flex flex-col gap-[100px]">
+    <div className="bg-[#1B3C74] flex flex-col gap-[65px] pt-[40px] pb-[10px] px-3 sm:px-4">
+      <div className="flex justify-around mx-auto pt-[39px] w-[100%] max-w-[1300px] items-center gap-[200px] gap-y-[130px] flex-wrap">
+        <div className="flex flex-col gap-[50px]">
           <img
             src="/assets/brand.png"
             alt="Medify"
@@ -31,131 +31,132 @@ export default () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-[10px]">
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>About Us</span>
+        <div className="flex justify-center items-center flex-wrap gap-y-[100px] gap-[180px]">
+          <div className="flex flex-col gap-[10px]">
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>About Us</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Our Pricing</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Our Gallery</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Appointment</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Privacy Policy</span>
+            </div>
           </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Our Pricing</span>
+          <div className="flex flex-col gap-[10px]">
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Orthology</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Neurology</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Dental Care</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Opthalmology</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Cardiology</span>
+            </div>
           </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Our Gallery</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Appointment</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Privacy Policy</span>
-          </div>
-        </div>
-        <div className="flex flex-col gap-[10px]">
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Orthology</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Neurology</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Dental Care</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Opthalmology</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Cardiology</span>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-[10px]">
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>About Us</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Our Pricing</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Our Gallery</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Appointment</span>
-          </div>
-          <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
-            <img
-              src="/assets/rightArrow.png"
-              className="max-w-[10px] max-h-[15px]"
-              alt="Arrow"
-            />
-            <span>Privacy Policy</span>
+          <div className="flex flex-col gap-[10px]">
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>About Us</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Our Pricing</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Our Gallery</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Appointment</span>
+            </div>
+            <div className="flex gap-[12.5px] cursor-pointer font-[Roboto] text-base font-normal text-white leading-[28px]">
+              <img
+                src="/assets/rightArrow.png"
+                className="max-w-[10px] max-h-[15px]"
+                alt="Arrow"
+              />
+              <span>Privacy Policy</span>
+            </div>
           </div>
         </div>
       </div>

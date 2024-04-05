@@ -35,9 +35,10 @@ export default () => {
       <h5 className="font-semibold text-[48px] leading-[60px] text-center text-[#1B3C74]">
         Our Medical Specialist
       </h5>
-      <div className="mx-auto max-w-[99vw] w-[1300px]">
+      <div className="mx-auto fixedWidthContainers max-w-[98vw] w-[1300px]">
         <Swiper
           className="pb-20"
+          spaceBetween={15}
           modules={[Autoplay, Pagination]}
           autoplay={{
             delay: 2500,

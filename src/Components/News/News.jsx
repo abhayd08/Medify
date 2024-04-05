@@ -74,7 +74,7 @@ export default () => {
         </h5>
       </div>
       <div className="flex justify-center flex-wrap gap-y-[45px] items-center gap-[24px]">
-        <div className="mx-auto max-w-[99vw] w-[1300px]">
+        <div className="mx-auto max-w-[98vw] fixedWidthContainers w-[1300px]">
           <Swiper
             className="pb-16"
             modules={[Autoplay, Pagination]}

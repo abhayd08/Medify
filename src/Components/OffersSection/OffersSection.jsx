@@ -18,7 +18,7 @@ const offers = [
 export default () => {
   return (
     <div
-      className={`g-white max-w-[1300px] pt-20 mx-auto pb-5 ${styles.container} px-1`}
+      className={`bg-white max-w-[1300px] pt-20 mx-auto pb-5 ${styles.container} px-1`}
     >
       <Swiper
         modules={[Autoplay, Pagination]}

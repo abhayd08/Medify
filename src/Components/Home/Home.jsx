@@ -105,16 +105,15 @@ const Home = () => {
         {selectedNavItem === null ? <SearchCateorySelector /> : ""}
         {selectedNavItem === null ? <OffersSection /> : ""}
         {selectedNavItem === null ? <Specialisations /> : ""}
-        {/*
-        <Specialists />
-        {medicalCentersData.length > 0 ? <DisplayMedicalCenters /> : ""} */}
+        {selectedNavItem === null ? <Specialists /> : ""}
+        {medicalCentersData.length > 0 ? <DisplayMedicalCenters /> : ""}
       </MedifyContext.Provider>
-      {/* <Features />
-      <News />
-      <Achievements />
-      <FAQs />
+      {selectedNavItem === null ? <Features /> : ""}
+      {selectedNavItem === null ? <News /> : ""}
+      {selectedNavItem === null ? <Achievements /> : ""}
+      {selectedNavItem === null ? <FAQs /> : ""}
       <DownloadSection />
-      <Footer /> */}
+      <Footer />
     </>
   );
 };

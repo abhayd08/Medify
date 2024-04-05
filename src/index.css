@@ -76,9 +76,11 @@ body {
   body {
     display: flex;
   }
-}
 
-@media (max-width: 300px) {
+  .fixedWidthContainers {
+    min-width: 300px !important;
+  }
+
   .heroImage {
     min-width: 300px;
   }

@@ -1,5 +1,5 @@
 @media (max-width: 300px) {
-    .container {
-        width: 310px !important;
-    }
+  .container {
+    max-width: 315px !important;
+  }
 }

@@ -110,7 +110,7 @@ export default () => {
           <div
             className={`relative ${
               selectedState === "State" ? "text-[#9CA3AF]" : "text-[#11181C]"
-            } text-sm w-[300px] rounded-[8px] h-[50px]`}
+            } text-sm w-[300px] max-w-[92vw] fixedWidthContainers rounded-[8px] h-[50px]`}
           >
             <select
               value={selectedState}
@@ -151,7 +151,7 @@ export default () => {
           <div
             className={`relative ${
               selectedCity === "City" ? "text-[#9CA3AF]" : "text-[#11181C]"
-            } text-sm w-[300px] rounded-[8px] h-[50px]`}
+            } text-sm w-[300px] max-w-[92vw] fixedWidthContainers rounded-[8px] h-[50px]`}
           >
             <select
               value={selectedCity}

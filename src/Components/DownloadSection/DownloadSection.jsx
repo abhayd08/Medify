@@ -1,7 +1,7 @@
 export default () => {
   return (
     <div
-      className="pt-[42px] pb-[13px] px-2 flex justify-center items-center flex-wrap gap-[90px] gap-y-10"
+      className="pt-[42px] pb-[13px] px-2 flex justify-center items-center flex-wrap gap-[30px] gap-y-10"
       style={{
         background:
           "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
@@ -16,7 +16,7 @@ export default () => {
             alt="Redirect"
           />
           <div className="max-w-[568px] flex-col flex gap-[50px] sm:gap-[23px]">
-            <h3 className="font-semibold max-w-[350px] text-[32px] sm:text-[48px] leading-[47px] sm:leading-[65px] text-[#1B3C74]">
+            <h3 className="font-semibold max-w-[350px] text-[40px] sm:text-[48px] leading-[55px] sm:leading-[67px] text-[#1B3C74]">
               Download the <span className="text-[#2AA7FF]">Medify</span> App
             </h3>
             <span className="font-[Roboto] text-sm sm:text-base sm:leading-[24px] font-bold text-[#414146]">
@@ -28,7 +28,7 @@ export default () => {
           className="flex justify-center gap-[17px] gap-y-[14px] items-center flex-wrap"
           onSubmit={(e) => e.preventDefault()}
         >
-          <div className="text-sm flex w-[391px] max-w-[95vw] bg-[#FAFBFE] border-[1px] border-[#F0F0F0] rounded-[8px] h-[47px]">
+          <div className="text-sm flex w-[391px] max-w-[92vw] md:ml-20 fixedWidthContainers bg-[#FAFBFE] border-[1px] border-[#F0F0F0] rounded-[8px] h-[47px]">
             <span className="border-r-[1px] rounded-tl-[8px] rounded-bl-[8px] bg-[#FAFBFE] text-[#000000] font-bold b-[#B4B4BE] w-[55.38px] flex justify-center items-center text-[14px]">
               +91
             </span>
