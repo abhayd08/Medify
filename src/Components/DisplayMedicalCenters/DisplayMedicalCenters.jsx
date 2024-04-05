@@ -138,7 +138,12 @@ export default () => {
                             medicalCenterData["Provider ID"]
                           )
                         }
-                        className="focus:outline-white flex justify-center items-center text-center rounded-[4px] bg-[#2AA7FF] text-[14px] w-[212px] h-[40px] text-white"
+                        className={`focus:outline-white flex justify-center items-center text-center rounded-[4px] ${
+                          visibleBookingCenter ===
+                          medicalCenterData["Provider ID"]
+                            ? "bg-danger"
+                            : "bg-[#2AA7FF]"
+                        } text-[14px] w-[212px] h-[40px] text-white`}
                       >
                         {visibleBookingCenter ===
                         medicalCenterData["Provider ID"]
@@ -148,9 +153,11 @@ export default () => {
                     </div>
                   </div>
                 </div>
-
                 {visibleBookingCenter === medicalCenterData["Provider ID"] ? (
-                  <BookingsSection medicalCenterData={medicalCenterData} />
+                  <BookingsSection
+                    visibleBookingCenter={visibleBookingCenter}
+                    medicalCenterData={medicalCenterData}
+                  />
                 ) : (
                   ""
                 )}

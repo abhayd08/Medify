@@ -1,0 +1,21 @@
+.navItem1::before {
+  content: "";
+  background-color: #2aa7ff;
+  height: 6px;
+  width: 100px;
+  position: absolute;
+  bottom: -3.2rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navItem2::before {
+  content: "";
+  background-color: #2aa7ff;
+  height: 6px;
+  width: 90px;
+  position: absolute;
+  bottom: -3.2rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

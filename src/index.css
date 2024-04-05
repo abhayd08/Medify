@@ -42,7 +42,31 @@ body {
   position: relative;
 }
 
-@media (min-width: 974px) {
+@media (min-width: 1050px) {
+  .heroImage {
+    width: 450px;
+  }
+}
+
+@media (min-width: 1075px) {
+  .heroImage {
+    width: 475px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .heroImage {
+    width: 500px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .heroImage {
+    width: 525px;
+  }
+}
+
+@media (min-width: 1025px) {
   .heroSection {
     justify-content: space-between;
   }

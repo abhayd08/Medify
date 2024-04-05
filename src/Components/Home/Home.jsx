@@ -16,6 +16,9 @@ import Footer from "../Footer/Footer";
 import SubHeader from "../SubHeader/SubHeader";
 import { useDisclosure } from "@nextui-org/react";
 import "animate.css";
+import OffersSection from "../OffersSection/OffersSection";
+import Specialisations from "../Specialisations/Specialisations";
+import Specialists from "../Specialists/Specialists";
 
 const Home = () => {
   const [states, setStates] = useState([]);
@@ -31,6 +34,7 @@ const Home = () => {
   const [bookingToRemove, setBookingToRemove] = useState(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [alertType, setAlertType] = useState(null);
+  const [selectedNavItem, setSelectedNavItem] = useState(null);
 
   console.log(bookings);
 
@@ -91,20 +95,26 @@ const Home = () => {
           setAlertType,
           bookingToRemove,
           setBookingToRemove,
+          selectedNavItem,
+          setSelectedNavItem,
         }}
       >
         <Header />
-        <SubHeader />
-        <HeroSection />
-        <SearchCateorySelector />
-        {medicalCentersData.length > 0 ? <DisplayMedicalCenters /> : ""}
+        {selectedNavItem !== null ? <SubHeader /> : ""}
+        {selectedNavItem === null ? <HeroSection /> : ""}
+        {selectedNavItem === null ? <SearchCateorySelector /> : ""}
+        {selectedNavItem === null ? <OffersSection /> : ""}
+        {selectedNavItem === null ? <Specialisations /> : ""}
+        {/*
+        <Specialists />
+        {medicalCentersData.length > 0 ? <DisplayMedicalCenters /> : ""} */}
       </MedifyContext.Provider>
-      <Features />
+      {/* <Features />
       <News />
       <Achievements />
       <FAQs />
       <DownloadSection />
-      <Footer />
+      <Footer /> */}
     </>
   );
 };

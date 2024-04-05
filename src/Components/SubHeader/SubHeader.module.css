@@ -1,8 +1,18 @@
-.coloredBox, .coloredBox2 {
+.container {
+  background: linear-gradient(
+    81deg,
+    #e7f0ff 9.01%,
+    rgba(232, 241, 255, 0.47) 89.11%
+  );
+}
+
+.coloredBox,
+.coloredBox2 {
   background: linear-gradient(91.75deg, #2aa7ff 1.4%, #0c8ce6 100.57%);
 }
 
-.form, .form2 {
+.form,
+.form2 {
   box-shadow: 6px 6px 35px 0px #1028511c;
 }
 
@@ -77,7 +87,8 @@
 }
 
 @media (max-width: 300px) {
-  .form, .form2 {
+  .form,
+  .form2 {
     min-width: 300px;
   }
 }

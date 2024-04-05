@@ -1,0 +1,20 @@
+@media (max-width: 385px) {
+  .heading {
+    font-size: 44px !important;
+    line-height: 58px !important;
+  }
+}
+
+@media (max-width: 355px) {
+  .heading {
+    font-size: 40px !important;
+    line-height: 53px !important;
+  }
+}
+
+@media (max-width: 325px) {
+  .heading {
+    font-size: 36px !important;
+    line-height: 48px !important;
+  }
+}

@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import MedifyContext from "../Contexts/MedifyContext";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
+import { motion } from "framer-motion";
 
 export default ({ component }) => {
   const {
@@ -18,6 +19,7 @@ export default ({ component }) => {
     setLoadingContent,
     setMedicalCentersData,
     setSearchedLocation,
+    selectedNavItem,
   } = useContext(MedifyContext);
 
   const [btnLoadingContent, setBtnLoadingContent] = useState("Search");
@@ -93,17 +95,25 @@ export default ({ component }) => {
 
   return (
     <div
-      className={`px-2 relative gap-[60px] gap-y-0 flex justify-center items-center ${styles.container}`}
+      className={`px-2 relative gap-[60px] animate__animated animate__fadeInLeft gap-y-0 flex justify-center items-center ${styles.container}`}
     >
-      {component === "MyBookings" ? (
+      {selectedNavItem === "myBookings" ? (
         <>
           <div
             className={`absolute top-0 -z-10 w-[100%] rounded-b-[16px] ${styles.coloredBox}`}
           ></div>
-          <h4 className="font-bold text-[35px] h-[80px] flex justify-center sm:text-[40px] leading-[45px] sm:leading-[50px] text-center text-white">
+          <motion.h4
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.01 }}
+            whileInView={{ opacity: 1 }}
+            className="font-bold text-[35px] h-[80px] flex justify-center sm:text-[40px] leading-[45px] sm:leading-[50px] text-center text-white"
+          >
             My Bookings
-          </h4>
-          <form
+          </motion.h4>
+          <motion.form
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.01 }}
+            whileInView={{ opacity: 1 }}
             onSubmit={(e) => e.preventDefault()}
             className={`py-[27px] flex justify-center items-center gap-[20px] rounded-[15px] bg-[#FFFFFF] px-[20px] max-w-[96.5vw] w-[780px] ${styles.form}`}
           >
@@ -124,14 +134,17 @@ export default ({ component }) => {
                 alt="Search"
               />
             </button>
-          </form>
+          </motion.form>
         </>
       ) : (
         <>
           <div
             className={`absolute top-0 -z-10 w-[100%] rounded-b-[16px] ${styles.coloredBox2}`}
           ></div>
-          <form
+          <motion.form
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.01 }}
+            whileInView={{ opacity: 1 }}
             onSubmit={(e) =>
               fetchMedicalCenters(e, selectedState, selectedCity)
             }
@@ -249,7 +262,7 @@ export default ({ component }) => {
                 alt="Search"
               />
             </button>
-          </form>
+          </motion.form>
         </>
       )}
     </div>

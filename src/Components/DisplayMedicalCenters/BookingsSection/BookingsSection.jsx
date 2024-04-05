@@ -9,7 +9,7 @@ import MedifyContext from "../../Contexts/MedifyContext";
 import ConfirmBoooking from "./ConfirmBoooking";
 import { enqueueSnackbar } from "notistack";
 
-export default ({ medicalCenterData }) => {
+export default ({ medicalCenterData, visibleBookingCenter }) => {
   const {
     selectedSlot,
     setSelectedSlot,
@@ -157,11 +157,17 @@ export default ({ medicalCenterData }) => {
     return isSlotAvailable;
   };
 
-  const isSlotAlreadyBookedFn = (bookings, slot) => {
+  console.log(bookings[0]);
+  const isSlotAlreadyBookedFn = (bookings, slot, medicalCenterData) => {
     let isSlotAlreadyBooked = false;
     let bookingid = null;
     bookings.forEach((booking) => {
-      if (booking.slot.id === slot.id && booking.date.id === selectedDate.id) {
+      if (
+        booking.slot.id === slot.id &&
+        booking.date.id === selectedDate.id &&
+        booking.medicalCenterData["Provider ID"] ===
+          medicalCenterData["Provider ID"]
+      ) {
         isSlotAlreadyBooked = true;
         bookingid = booking.id;
       }
@@ -255,7 +261,7 @@ export default ({ medicalCenterData }) => {
             <>
               {slotsAvaliable[0].morning.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
-                  isSlotAlreadyBookedFn(bookings, slot);
+                  isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
 
                 return (
                   <div
@@ -298,7 +304,7 @@ export default ({ medicalCenterData }) => {
               {slotsAvaliable[0].morning.map((slot) => {
                 const isSlotAvailable = checkSlotAvailability(dates[0], slot);
                 const { isSlotAlreadyBooked, bookingid } =
-                  isSlotAlreadyBookedFn(bookings, slot);
+                  isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
                 return (
                   <div
                     onClick={() => {
@@ -353,7 +359,7 @@ export default ({ medicalCenterData }) => {
             <>
               {slotsAvaliable[0].afternoon.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
-                  isSlotAlreadyBookedFn(bookings, slot);
+                  isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
                 return (
                   <div
                     onClick={() => {
@@ -395,7 +401,7 @@ export default ({ medicalCenterData }) => {
               {slotsAvaliable[0].afternoon.map((slot) => {
                 const isSlotAvailable = checkSlotAvailability(dates[0], slot);
                 const { isSlotAlreadyBooked, bookingid } =
-                  isSlotAlreadyBookedFn(bookings, slot);
+                  isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
 
                 return (
                   <div
@@ -451,7 +457,7 @@ export default ({ medicalCenterData }) => {
             <>
               {slotsAvaliable[0].evening.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
-                  isSlotAlreadyBookedFn(bookings, slot);
+                  isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
                 return (
                   <div
                     onClick={() => {
@@ -460,7 +466,11 @@ export default ({ medicalCenterData }) => {
                           variant: "warning",
                         });
                       } else {
-                        if (!isSlotAlreadyBooked) {
+                        if (
+                          !isSlotAlreadyBooked &&
+                          visibleBookingCenter ===
+                            medicalCenterData["Provider ID"]
+                        ) {
                           setSelectedSlot(slot);
                           setAlertType("confirmation");
                           onOpen();
@@ -493,7 +503,7 @@ export default ({ medicalCenterData }) => {
               {slotsAvaliable[0].evening.map((slot) => {
                 const isSlotAvailable = checkSlotAvailability(dates[0], slot);
                 const { isSlotAlreadyBooked, bookingid } =
-                  isSlotAlreadyBookedFn(bookings, slot);
+                  isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
 
                 return (
                   <div
