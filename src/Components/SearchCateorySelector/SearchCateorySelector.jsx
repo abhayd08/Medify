@@ -91,7 +91,7 @@ export default () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative pb-2">
       <div
         className="h-[70%] w-[100%] absolute top-0 -z-10"
         style={{

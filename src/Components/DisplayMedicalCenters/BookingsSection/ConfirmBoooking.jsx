@@ -26,6 +26,8 @@ export default function ({ medicalCenterData }) {
     setAlertType,
     bookingToRemove,
     setBookingToRemove,
+    dates,
+    setDates,
   } = useContext(MedifyContext);
 
   return (
@@ -75,7 +77,7 @@ export default function ({ medicalCenterData }) {
                     </Button>
                     <Button
                       color="primary"
-                      className="bg-[var(--color-primary)] data-[focus=true]:opacity-100 data-[hover=true]:opacity-100"
+                      className="bg-[var(--color-primary)] data-[focus=true]:opacity-100 hover:opacity-100 data-[hover=true]:opacity-100"
                       onPress={() => {
                         setBookings((prevBookings) => {
                           return [
@@ -88,6 +90,18 @@ export default function ({ medicalCenterData }) {
                             },
                           ];
                         });
+                        // const dateWhereChangeNeeded = dates.find(
+                        //   (date) => date.date.id === selectedDate.date.id
+                        // );
+                        // console.log(dates.indexOf(dateWhereChangeNeeded))
+                        // setDates((prevDates) => {
+                        //   const datesData = [...prevDates];
+                        //   const index = datesData.indexOf(
+                        //     dateWhereChangeNeeded
+                        //   );
+                        //   datesData[index].date.numberOfSlotsAvailable -= 1;
+                        //   return datesData;
+                        // });
                         setSelectedSlot(null);
                         setAlertType(null);
                         enqueueSnackbar("Slot booked.", { variant: "success" });

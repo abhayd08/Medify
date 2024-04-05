@@ -36,8 +36,6 @@ const Home = () => {
   const [alertType, setAlertType] = useState(null);
   const [selectedNavItem, setSelectedNavItem] = useState(null);
 
-  console.log(bookings);
-
   useEffect(() => {
     (async () => {
       try {
@@ -103,10 +101,10 @@ const Home = () => {
         {selectedNavItem !== null ? <SubHeader /> : ""}
         {selectedNavItem === null ? <HeroSection /> : ""}
         {selectedNavItem === null ? <SearchCateorySelector /> : ""}
+        {medicalCentersData.length > 0 || selectedNavItem === "myBookings" ? <DisplayMedicalCenters /> : ""}
         {selectedNavItem === null ? <OffersSection /> : ""}
         {selectedNavItem === null ? <Specialisations /> : ""}
         {selectedNavItem === null ? <Specialists /> : ""}
-        {medicalCentersData.length > 0 ? <DisplayMedicalCenters /> : ""}
       </MedifyContext.Provider>
       {selectedNavItem === null ? <Features /> : ""}
       {selectedNavItem === null ? <News /> : ""}

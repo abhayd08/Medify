@@ -74,15 +74,16 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
   useEffect(() => {
     setDates([]);
     const currentDate = new Date();
+    currentDate.setHours(currentDate.getHours() + 12);
 
     setDates((prevDates) => [
       ...prevDates,
-      { date: currentDate, numberOfSlotsAvailable: 11, id: "day1" },
+      { date: currentDate, numberOfSlotsAvailable: 0, id: "day1" },
     ]);
 
     setSelectedDate({
       date: currentDate,
-      numberOfSlotsAvailable: 11,
+      numberOfSlotsAvailable: 0,
       id: "day1",
     });
 
@@ -90,42 +91,42 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
     day2.setDate(day2.getDate() + 1);
     setDates((prevDates) => [
       ...prevDates,
-      { date: day2, numberOfSlotsAvailable: 20, id: "day2" },
+      { date: day2, numberOfSlotsAvailable: 18, id: "day2" },
     ]);
 
     const day3 = new Date();
     day3.setDate(day3.getDate() + 2);
     setDates((prevDates) => [
       ...prevDates,
-      { date: day3, numberOfSlotsAvailable: 20, id: "day3" },
+      { date: day3, numberOfSlotsAvailable: 18, id: "day3" },
     ]);
 
     const day4 = new Date();
     day4.setDate(day4.getDate() + 3);
     setDates((prevDates) => [
       ...prevDates,
-      { date: day4, numberOfSlotsAvailable: 20, id: "day4" },
+      { date: day4, numberOfSlotsAvailable: 18, id: "day4" },
     ]);
 
     const day5 = new Date();
     day5.setDate(day5.getDate() + 4);
     setDates((prevDates) => [
       ...prevDates,
-      { date: day5, numberOfSlotsAvailable: 20, id: "day5" },
+      { date: day5, numberOfSlotsAvailable: 18, id: "day5" },
     ]);
 
     const day6 = new Date();
     day6.setDate(day6.getDate() + 5);
     setDates((prevDates) => [
       ...prevDates,
-      { date: day6, numberOfSlotsAvailable: 20, id: "day6" },
+      { date: day6, numberOfSlotsAvailable: 18, id: "day6" },
     ]);
 
     const day7 = new Date();
     day7.setDate(day7.getDate() + 6);
     setDates((prevDates) => [
       ...prevDates,
-      { date: day7, numberOfSlotsAvailable: 20, id: "day7" },
+      { date: day7, numberOfSlotsAvailable: 18, id: "day7" },
     ]);
   }, []);
 
@@ -157,7 +158,65 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
     return isSlotAvailable;
   };
 
-  console.log(bookings[0]);
+  useEffect(() => {
+    slotsAvaliable[0].morning.map((slot) => {
+      if (
+        checkSlotAvailability(dates[0], slot) &&
+        dates[0].numberOfSlotsAvailable <= slotsAvaliable[0].morning.length &&
+        selectedDate.numberOfSlotsAvailable <= slotsAvaliable[0].morning.length
+      ) {
+        setDates((prevDates) => {
+          let datesData = [...prevDates];
+          datesData[0].numberOfSlotsAvailable += 1;
+          return datesData;
+        });
+        setSelectedDate((prevDate) => {
+          let dateData = { ...prevDate };
+          dateData.numberOfSlotsAvailable += 1;
+          return dateData;
+        });
+      }
+    });
+    slotsAvaliable[0].afternoon.map((slot) => {
+      if (
+        checkSlotAvailability(dates[0], slot) &&
+        dates[0].numberOfSlotsAvailable <= slotsAvaliable[0].morning.length &&
+        selectedDate.numberOfSlotsAvailable <= slotsAvaliable[0].morning.length
+      ) {
+        setDates((prevDates) => {
+          let datesData = [...prevDates];
+          datesData[0].numberOfSlotsAvailable += 1;
+          return datesData;
+        });
+        setSelectedDate((prevDate) => {
+          let dateData = { ...prevDate };
+          dateData.numberOfSlotsAvailable += 1;
+          return dateData;
+        });
+      }
+    });
+    slotsAvaliable[0].evening.map((slot) => {
+      if (
+        checkSlotAvailability(dates[0], slot) &&
+        dates[0].numberOfSlotsAvailable <= slotsAvaliable[0].morning.length &&
+        selectedDate.numberOfSlotsAvailable <= slotsAvaliable[0].morning.length
+      ) {
+        setDates((prevDates) => {
+          let datesData = [...prevDates];
+          datesData[0].numberOfSlotsAvailable += 1;
+          return datesData;
+        });
+        setSelectedDate((prevDate) => {
+          let dateData = { ...prevDate };
+          dateData.numberOfSlotsAvailable += 1;
+          return dateData;
+        });
+      }
+    });
+  }, [slotsAvaliable, dates]);
+
+  console.log(dates);
+
   const isSlotAlreadyBookedFn = (bookings, slot, medicalCenterData) => {
     let isSlotAlreadyBooked = false;
     let bookingid = null;
@@ -550,7 +609,26 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
           )}
         </div>
       </div>
-      <ConfirmBoooking medicalCenterData={medicalCenterData} />
+      <MedifyContext.Provider
+        value={{
+          bookings,
+          setBookings,
+          selectedDate,
+          selectedSlot,
+          isOpen,
+          onOpen,
+          onOpenChange,
+          setSelectedSlot,
+          alertType,
+          setAlertType,
+          bookingToRemove,
+          setBookingToRemove,
+          dates,
+          setDates,
+        }}
+      >
+        <ConfirmBoooking medicalCenterData={medicalCenterData} />
+      </MedifyContext.Provider>
     </div>
   );
 };

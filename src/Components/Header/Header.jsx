@@ -111,7 +111,11 @@ export default () => {
                 }
               });
             }}
-            className="w-[130px] border-0 outline-0 h-[40px] leading-[8px] rounded-[8px] text-center text-white bg-[var(--color-primary)] text-sm"
+            className={`w-[130px] border-0 outline-0 h-[40px] leading-[8px] rounded-[8px] text-center text-white ${
+              selectedNavItem === "myBookings"
+                ? "bg-danger"
+                : "bg-[var(--color-primary)]"
+            } text-sm`}
           >
             My Bookings
           </button>
