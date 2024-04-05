@@ -1,12 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/mousewheel";
 import "swiper/css/keyboard";
 import { Mousewheel, Keyboard } from "swiper/modules";
+import MedifyContext from "../../Contexts/MedifyContext";
+import ConfirmBoooking from "./ConfirmBoooking";
+import { enqueueSnackbar } from "notistack";
 
-export default () => {
+export default ({ medicalCenterData }) => {
+  const {
+    selectedSlot,
+    setSelectedSlot,
+    selectedDate,
+    setSelectedDate,
+    bookings,
+    setBookings,
+    isOpen,
+    onOpen,
+    onOpenChange,
+    alertType,
+    setAlertType,
+    bookingToRemove,
+    setBookingToRemove,
+  } = useContext(MedifyContext);
+
   const swiperRef = useRef(null);
 
   const goToPrevSlide = () => {
@@ -21,8 +40,36 @@ export default () => {
     }
   };
 
-  const [selectedDate, setSelectedDate] = useState({});
   const [dates, setDates] = useState([]);
+
+  const [slotsAvaliable, setSlotsAvailabe] = useState([
+    {
+      morning: [
+        { timing: "9:30 AM", id: "morningSlot1" },
+        { timing: "10:00 AM", id: "morningSlot2" },
+        { timing: "10:30 AM", id: "morningSlot3" },
+        { timing: "11:00 AM", id: "morningSlot4" },
+        { timing: "11:30 AM", id: "morningSlot5" },
+      ],
+      afternoon: [
+        { timing: "12:00 PM", id: "afternoonSlot1" },
+        { timing: "12:30 PM", id: "afternoonSlot2" },
+        { timing: "1:00 PM", id: "afternoonSlot3" },
+        { timing: "1:30 PM", id: "afternoonSlot4" },
+        { timing: "2:00 PM", id: "afternoonSlot5" },
+        { timing: "2:30 PM", id: "afternoonSlot6" },
+        { timing: "3:00 PM", id: "afternoonSlot7" },
+        { timing: "3:30 PM", id: "afternoonSlot8" },
+        { timing: "4:00 PM", id: "afternoonSlot9" },
+      ],
+      evening: [
+        { timing: "4:30 PM", id: "eveningSlot1" },
+        { timing: "5:00 PM", id: "eveningSlot2" },
+        { timing: "5:30 PM", id: "eveningSlot3" },
+        { timing: "6:00 PM", id: "eveningSlot4" },
+      ],
+    },
+  ]);
 
   useEffect(() => {
     setDates([]);
@@ -82,6 +129,46 @@ export default () => {
     ]);
   }, []);
 
+  const checkSlotAvailability = (date, slot) => {
+    const currentHour = date?.date.getHours();
+    const currentMinutes = date?.date.getMinutes();
+
+    const [slotTime, period] = slot.timing.split(" ");
+    const [slotHour, slotMinutes] = slotTime.split(":").map(Number);
+
+    const adjustedSlotHour =
+      period === "AM"
+        ? slotHour === 12
+          ? 0
+          : slotHour
+        : slotHour === 12
+        ? slotHour
+        : slotHour + 12;
+
+    let isSlotAvailable = false;
+
+    if (
+      currentHour < adjustedSlotHour ||
+      (currentHour === adjustedSlotHour && currentMinutes < slotMinutes)
+    ) {
+      isSlotAvailable = true;
+    }
+
+    return isSlotAvailable;
+  };
+
+  const isSlotAlreadyBookedFn = (bookings, slot) => {
+    let isSlotAlreadyBooked = false;
+    let bookingid = null;
+    bookings.forEach((booking) => {
+      if (booking.slot.id === slot.id && booking.date.id === selectedDate.id) {
+        isSlotAlreadyBooked = true;
+        bookingid = booking.id;
+      }
+    });
+    return { isSlotAlreadyBooked, bookingid };
+  };
+
   const setDateFormat = (date) => {
     const weekday = date.toLocaleDateString("en-US", { weekday: "short" });
     const day = date.toLocaleDateString("en-US", { day: "numeric" });
@@ -91,7 +178,7 @@ export default () => {
   };
 
   return (
-    <div className="border-t-[1px] max-w-[97vw] mx-auto rounded-b-[15px] pb-[5px] border-[#efeff1]">
+    <div className="border-t-[1px] animate__animated animate__bounceInLeft w-[786px] max-w-[95vw] mx-auto rounded-b-[15px] pb-[5px] border-[#efeff1]">
       <div className="bg-[#00A500] h-[5.25px] mx-auto w-[44px] -mt-[0.8px] rounded-[3.5px]"></div>
       <div className="mt-[20px] relative">
         <div
@@ -163,27 +250,97 @@ export default () => {
         <div className="py-[13.5px] w-[110px] font-normal text-[14px] text-[#414146] leading-[19.6px]">
           Morning
         </div>
-        <div className="flex gap-[31px] gap-y-[21px] flex-wrap">
+        <div className="flex gap-[31px] gap-y-[25px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                09:30 AM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                10:00 AM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                10:30 AM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                10:00 AM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                10:30 AM
-              </div>
+              {slotsAvaliable[0].morning.map((slot) => {
+                const { isSlotAlreadyBooked, bookingid } =
+                  isSlotAlreadyBookedFn(bookings, slot);
+
+                return (
+                  <div
+                    onClick={() => {
+                      if (typeof selectedDate.id !== "string") {
+                        enqueueSnackbar("Kindly select the date first.", {
+                          variant: "warning",
+                        });
+                      } else {
+                        if (!isSlotAlreadyBooked) {
+                          setSelectedSlot(slot);
+                          setAlertType("confirmation");
+                          onOpen();
+                        } else {
+                          setAlertType("alreadyBooked");
+                          const removableBooking = bookings.find(
+                            (booking) => booking.id === bookingid
+                          );
+                          setBookingToRemove(removableBooking);
+                          onOpen();
+                        }
+                      }
+                    }}
+                    key={slot.id}
+                    className={`border-[1px] border-solid ${
+                      !isSlotAlreadyBooked
+                        ? "border-[#2AA7FF] text-[#2AA7FF] cursor-pointer"
+                        : isSlotAlreadyBooked
+                        ? "bg-[#2AA7FF] text-white border-white cursor-default"
+                        : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
+                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                  >
+                    {slot.timing}
+                  </div>
+                );
+              })}
             </>
           ) : (
-            <></>
+            <>
+              {slotsAvaliable[0].morning.map((slot) => {
+                const isSlotAvailable = checkSlotAvailability(dates[0], slot);
+                const { isSlotAlreadyBooked, bookingid } =
+                  isSlotAlreadyBookedFn(bookings, slot);
+                return (
+                  <div
+                    onClick={() => {
+                      if (typeof selectedDate.id !== "string") {
+                        enqueueSnackbar("Kindly select the date first.", {
+                          variant: "warning",
+                        });
+                      } else {
+                        if (!isSlotAvailable) {
+                          enqueueSnackbar("Slot not available.", {
+                            variant: "warning",
+                          });
+                        } else {
+                          if (!isSlotAlreadyBooked) {
+                            setSelectedSlot(slot);
+                            setAlertType("confirmation");
+                            onOpen();
+                          } else {
+                            setAlertType("alreadyBooked");
+                            const removableBooking = bookings.find(
+                              (booking) => booking.id === bookingid
+                            );
+                            setBookingToRemove(removableBooking);
+                            onOpen();
+                          }
+                        }
+                      }
+                    }}
+                    key={slot.id}
+                    className={`border-[1px] border-solid ${
+                      isSlotAvailable && !isSlotAlreadyBooked
+                        ? "border-[#2AA7FF] text-[#2AA7FF] cursor-pointer"
+                        : isSlotAlreadyBooked
+                        ? "bg-[#2AA7FF] text-white border-white cursor-default"
+                        : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
+                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                  >
+                    {slot.timing}
+                  </div>
+                );
+              })}
+            </>
           )}
         </div>
       </div>
@@ -191,39 +348,97 @@ export default () => {
         <div className="py-[13.5px] w-[110px] font-normal text-[14px] text-[#414146] leading-[19.6px]">
           Afternoon
         </div>
-        <div className="flex gap-[31px] gap-y-[21px] flex-wrap">
+        <div className="flex gap-[31px] gap-y-[25px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                12:00 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                12:30 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                01:00 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                01:30 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                02:00 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                02:30 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                03:00 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                03:30 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                04:00 PM
-              </div>
+              {slotsAvaliable[0].afternoon.map((slot) => {
+                const { isSlotAlreadyBooked, bookingid } =
+                  isSlotAlreadyBookedFn(bookings, slot);
+                return (
+                  <div
+                    onClick={() => {
+                      if (typeof selectedDate.id !== "string") {
+                        enqueueSnackbar("Kindly select the date first.", {
+                          variant: "warning",
+                        });
+                      } else {
+                        if (!isSlotAlreadyBooked) {
+                          setSelectedSlot(slot);
+                          setAlertType("confirmation");
+                          onOpen();
+                        } else {
+                          setAlertType("alreadyBooked");
+                          const removableBooking = bookings.find(
+                            (booking) => booking.id === bookingid
+                          );
+                          setBookingToRemove(removableBooking);
+                          onOpen();
+                        }
+                      }
+                    }}
+                    key={slot.id}
+                    className={`border-[1px] border-solid ${
+                      !isSlotAlreadyBooked
+                        ? "border-[#2AA7FF] text-[#2AA7FF] cursor-pointer"
+                        : isSlotAlreadyBooked
+                        ? "bg-[#2AA7FF] text-white border-white cursor-default"
+                        : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
+                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                  >
+                    {slot.timing}
+                  </div>
+                );
+              })}
             </>
           ) : (
-            <></>
+            <>
+              {slotsAvaliable[0].afternoon.map((slot) => {
+                const isSlotAvailable = checkSlotAvailability(dates[0], slot);
+                const { isSlotAlreadyBooked, bookingid } =
+                  isSlotAlreadyBookedFn(bookings, slot);
+
+                return (
+                  <div
+                    key={slot.id}
+                    onClick={() => {
+                      if (typeof selectedDate.id !== "string") {
+                        enqueueSnackbar("Kindly select the date first.", {
+                          variant: "warning",
+                        });
+                      } else {
+                        if (!isSlotAvailable) {
+                          enqueueSnackbar("Slot not available.", {
+                            variant: "warning",
+                          });
+                        } else {
+                          if (!isSlotAlreadyBooked) {
+                            setSelectedSlot(slot);
+                            setAlertType("confirmation");
+                            onOpen();
+                          } else {
+                            setAlertType("alreadyBooked");
+                            const removableBooking = bookings.find(
+                              (booking) => booking.id === bookingid
+                            );
+                            setBookingToRemove(removableBooking);
+                            onOpen();
+                          }
+                        }
+                      }
+                    }}
+                    className={`border-[1px] border-solid ${
+                      isSlotAvailable && !isSlotAlreadyBooked
+                        ? "border-[#2AA7FF] text-[#2AA7FF] cursor-pointer"
+                        : isSlotAlreadyBooked
+                        ? "bg-[#2AA7FF] text-white border-white cursor-default"
+                        : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
+                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                  >
+                    {slot.timing}
+                  </div>
+                );
+              })}
+            </>
           )}
         </div>
       </div>
@@ -231,30 +446,101 @@ export default () => {
         <div className="py-[13.5px] w-[110px] font-normal text-[14px] text-[#414146] leading-[19.6px]">
           Evening
         </div>
-        <div className="flex gap-[31px] gap-y-[21px] flex-wrap">
+        <div className="flex gap-[31px] gap-y-[25px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                04:30 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                05:00 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                05:30 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                06:00 PM
-              </div>
-              <div className="border-[1px] border-solid border-[#2AA7FF] flex justify-center items-center rounded-[3px] text-[#2AA7FF] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]">
-                06:30 PM
-              </div>
+              {slotsAvaliable[0].evening.map((slot) => {
+                const { isSlotAlreadyBooked, bookingid } =
+                  isSlotAlreadyBookedFn(bookings, slot);
+                return (
+                  <div
+                    onClick={() => {
+                      if (typeof selectedDate.id !== "string") {
+                        enqueueSnackbar("Kindly select the date first.", {
+                          variant: "warning",
+                        });
+                      } else {
+                        if (!isSlotAlreadyBooked) {
+                          setSelectedSlot(slot);
+                          setAlertType("confirmation");
+                          onOpen();
+                        } else {
+                          setAlertType("alreadyBooked");
+                          const removableBooking = bookings.find(
+                            (booking) => booking.id === bookingid
+                          );
+                          setBookingToRemove(removableBooking);
+                          onOpen();
+                        }
+                      }
+                    }}
+                    key={slot.id}
+                    className={`border-[1px] border-solid ${
+                      !isSlotAlreadyBooked
+                        ? "border-[#2AA7FF] text-[#2AA7FF] cursor-pointer"
+                        : isSlotAlreadyBooked
+                        ? "bg-[#2AA7FF] text-white border-white cursor-default"
+                        : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
+                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                  >
+                    {slot.timing}
+                  </div>
+                );
+              })}
             </>
           ) : (
-            <></>
+            <>
+              {slotsAvaliable[0].evening.map((slot) => {
+                const isSlotAvailable = checkSlotAvailability(dates[0], slot);
+                const { isSlotAlreadyBooked, bookingid } =
+                  isSlotAlreadyBookedFn(bookings, slot);
+
+                return (
+                  <div
+                    key={slot.id}
+                    onClick={() => {
+                      if (typeof selectedDate.id !== "string") {
+                        enqueueSnackbar("Kindly select the date first.", {
+                          variant: "warning",
+                        });
+                      } else {
+                        if (!isSlotAvailable) {
+                          enqueueSnackbar("Slot not available.", {
+                            variant: "warning",
+                          });
+                        } else {
+                          if (!isSlotAlreadyBooked) {
+                            setSelectedSlot(slot);
+                            setAlertType("confirmation");
+                            onOpen();
+                          } else {
+                            setAlertType("alreadyBooked");
+                            const removableBooking = bookings.find(
+                              (booking) => booking.id === bookingid
+                            );
+                            setBookingToRemove(removableBooking);
+                            onOpen();
+                          }
+                        }
+                      }
+                    }}
+                    className={`border-[1px] border-solid ${
+                      isSlotAvailable && !isSlotAlreadyBooked
+                        ? "border-[#2AA7FF] text-[#2AA7FF] cursor-pointer"
+                        : isSlotAlreadyBooked
+                        ? "bg-[#2AA7FF] text-white border-white cursor-default"
+                        : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
+                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                  >
+                    {slot.timing}
+                  </div>
+                );
+              })}
+            </>
           )}
         </div>
       </div>
+      <ConfirmBoooking medicalCenterData={medicalCenterData} />
     </div>
   );
 };

@@ -10,6 +10,15 @@ export default () => {
   const [startingIndex, setStartingIndex] = useState(0);
   const [endingIndex, setEndingIndex] = useState(5);
   const [currentItems, setCurrentItems] = useState([]);
+  const [visibleBookingCenter, setVisibleBookingCenter] = useState(null);
+
+  console.log(visibleBookingCenter);
+
+  const toggleBookingSectionVisibility = (medicalCenterId) => {
+    setVisibleBookingCenter((prevMedicalCenter) => {
+      return prevMedicalCenter === medicalCenterId ? null : medicalCenterId;
+    });
+  };
 
   useEffect(() => {
     setStartingIndex((currentPage - 1) * 5);
@@ -41,12 +50,14 @@ export default () => {
             </span>
           </div>
         </div>
-        <div className="max-w-[786px] gap-[25px] flex flex-col">
+        <div className="max-w-[97vw] w-[786px] gap-[25px] flex flex-col">
           {currentItems.map((medicalCenterData) => {
+            console.log(medicalCenterData);
             return (
               <div
-              key={medicalCenterData["Provider ID"]}
-              className="max-w-[786px] rounded-[15px]">
+                key={medicalCenterData["Provider ID"]}
+                className="max-w-[97vw] w-[786px] rounded-[15px]"
+              >
                 <div
                   key={medicalCenterData["Provider ID"]}
                   className="p-[24px] pb-[30px]"
@@ -122,14 +133,27 @@ export default () => {
                       <button
                         type="button"
                         aria-label="Book"
+                        onClick={() =>
+                          toggleBookingSectionVisibility(
+                            medicalCenterData["Provider ID"]
+                          )
+                        }
                         className="focus:outline-white flex justify-center items-center text-center rounded-[4px] bg-[#2AA7FF] text-[14px] w-[212px] h-[40px] text-white"
                       >
-                        Book FREE Center Visit
+                        {visibleBookingCenter ===
+                        medicalCenterData["Provider ID"]
+                          ? "Hide Booking Section"
+                          : "Book FREE Center Visit"}
                       </button>
                     </div>
                   </div>
                 </div>
-                <BookingsSection />
+
+                {visibleBookingCenter === medicalCenterData["Provider ID"] ? (
+                  <BookingsSection medicalCenterData={medicalCenterData} />
+                ) : (
+                  ""
+                )}
               </div>
             );
           })}

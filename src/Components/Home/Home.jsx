@@ -14,6 +14,8 @@ import FAQs from "../FAQs/FAQs";
 import DownloadSection from "../DownloadSection/DownloadSection";
 import Footer from "../Footer/Footer";
 import SubHeader from "../SubHeader/SubHeader";
+import { useDisclosure } from "@nextui-org/react";
+import "animate.css";
 
 const Home = () => {
   const [states, setStates] = useState([]);
@@ -23,6 +25,14 @@ const Home = () => {
   const [loadingContent, setLoadingContent] = useState("");
   const [medicalCentersData, setMedicalCentersData] = useState([]);
   const [searchedLocation, setSearchedLocation] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [selectedDate, setSelectedDate] = useState({});
+  const [bookings, setBookings] = useState([]);
+  const [bookingToRemove, setBookingToRemove] = useState(null);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [alertType, setAlertType] = useState(null);
+
+  console.log(bookings);
 
   useEffect(() => {
     (async () => {
@@ -68,6 +78,19 @@ const Home = () => {
           setMedicalCentersData,
           searchedLocation,
           setSearchedLocation,
+          selectedSlot,
+          setSelectedSlot,
+          selectedDate,
+          setSelectedDate,
+          bookings,
+          setBookings,
+          isOpen,
+          onOpen,
+          onOpenChange,
+          alertType,
+          setAlertType,
+          bookingToRemove,
+          setBookingToRemove,
         }}
       >
         <Header />
