@@ -23,6 +23,8 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
     alertType,
     setAlertType,
     bookingToRemove,
+    dates,
+    setDates,
     setBookingToRemove,
   } = useContext(MedifyContext);
 
@@ -40,9 +42,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
     }
   };
 
-  const [dates, setDates] = useState([]);
-
-  const [slotsAvaliable, setSlotsAvailabe] = useState([
+  const [slotsAvailable, setSlotsAvailable] = useState([
     {
       morning: [
         { timing: "9:30 AM", id: "morningSlot1" },
@@ -77,7 +77,11 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
 
     setDates((prevDates) => [
       ...prevDates,
-      { date: currentDate, numberOfSlotsAvailable: 0, id: "day1" },
+      {
+        date: currentDate,
+        numberOfSlotsAvailable: 0,
+        id: "day1",
+      },
     ]);
 
     setSelectedDate({
@@ -158,11 +162,11 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
   };
 
   useEffect(() => {
-    slotsAvaliable[0].morning.map((slot) => {
+    slotsAvailable[0].morning.map((slot) => {
       if (
         checkSlotAvailability(dates[0], slot) &&
-        dates[0].numberOfSlotsAvailable <= slotsAvaliable[0].morning.length &&
-        selectedDate.numberOfSlotsAvailable <= slotsAvaliable[0].morning.length
+        dates[0].numberOfSlotsAvailable <= slotsAvailable[0].morning.length &&
+        selectedDate.numberOfSlotsAvailable <= slotsAvailable[0].morning.length
       ) {
         setDates((prevDates) => {
           let datesData = [...prevDates];
@@ -176,11 +180,12 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
         });
       }
     });
-    slotsAvaliable[0].afternoon.map((slot) => {
+    slotsAvailable[0].afternoon.map((slot) => {
       if (
         checkSlotAvailability(dates[0], slot) &&
-        dates[0].numberOfSlotsAvailable <= slotsAvaliable[0].morning.length &&
-        selectedDate.numberOfSlotsAvailable <= slotsAvaliable[0].morning.length
+        dates[0].numberOfSlotsAvailable <= slotsAvailable[0].afternoon.length &&
+        selectedDate.numberOfSlotsAvailable <=
+          slotsAvailable[0].afternoon.length
       ) {
         setDates((prevDates) => {
           let datesData = [...prevDates];
@@ -194,11 +199,11 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
         });
       }
     });
-    slotsAvaliable[0].evening.map((slot) => {
+    slotsAvailable[0].evening.map((slot) => {
       if (
         checkSlotAvailability(dates[0], slot) &&
-        dates[0].numberOfSlotsAvailable <= slotsAvaliable[0].morning.length &&
-        selectedDate.numberOfSlotsAvailable <= slotsAvaliable[0].morning.length
+        dates[0].numberOfSlotsAvailable <= slotsAvailable[0].evening.length &&
+        selectedDate.numberOfSlotsAvailable <= slotsAvailable[0].evening.length
       ) {
         setDates((prevDates) => {
           let datesData = [...prevDates];
@@ -212,7 +217,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
         });
       }
     });
-  }, [slotsAvaliable, dates]);
+  }, [slotsAvailable, dates]);
 
   const isSlotAlreadyBookedFn = (bookings, slot, medicalCenterData) => {
     let isSlotAlreadyBooked = false;
@@ -299,9 +304,15 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
                       ? "Today"
                       : setDateFormat(item.date)}
                   </span>
-                  <span className="font-normal text-[12px] leading-[16.8px] text-center text-[#01A400]">
-                    {item.numberOfSlotsAvailable} slots available
-                  </span>
+                  {item.numberOfSlotsAvailable >= 1 ? (
+                    <span className="font-normal text-[12px] leading-[16.8px] text-center text-[#01A400]">
+                      {item.numberOfSlotsAvailable} slots available
+                    </span>
+                  ) : (
+                    <span className="font-normal text-[12px] leading-[16.8px] text-center text-danger">
+                      {item.numberOfSlotsAvailable} slots available
+                    </span>
+                  )}
                 </div>
               </SwiperSlide>
             );
@@ -315,7 +326,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
         <div className="flex gap-[31px] gap-y-[25px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
-              {slotsAvaliable[0].morning.map((slot) => {
+              {slotsAvailable[0].morning.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
 
@@ -357,7 +368,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
             </>
           ) : (
             <>
-              {slotsAvaliable[0].morning.map((slot) => {
+              {slotsAvailable[0].morning.map((slot) => {
                 const isSlotAvailable = checkSlotAvailability(dates[0], slot);
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
@@ -413,7 +424,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
         <div className="flex gap-[31px] gap-y-[25px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
-              {slotsAvaliable[0].afternoon.map((slot) => {
+              {slotsAvailable[0].afternoon.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
                 return (
@@ -454,7 +465,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
             </>
           ) : (
             <>
-              {slotsAvaliable[0].afternoon.map((slot) => {
+              {slotsAvailable[0].afternoon.map((slot) => {
                 const isSlotAvailable = checkSlotAvailability(dates[0], slot);
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
@@ -511,7 +522,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
         <div className="flex gap-[31px] gap-y-[25px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
-              {slotsAvaliable[0].evening.map((slot) => {
+              {slotsAvailable[0].evening.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
                 return (
@@ -556,7 +567,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
             </>
           ) : (
             <>
-              {slotsAvaliable[0].evening.map((slot) => {
+              {slotsAvailable[0].evening.map((slot) => {
                 const isSlotAvailable = checkSlotAvailability(dates[0], slot);
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
@@ -606,26 +617,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
           )}
         </div>
       </div>
-      <MedifyContext.Provider
-        value={{
-          bookings,
-          setBookings,
-          selectedDate,
-          selectedSlot,
-          isOpen,
-          onOpen,
-          onOpenChange,
-          setSelectedSlot,
-          alertType,
-          setAlertType,
-          bookingToRemove,
-          setBookingToRemove,
-          dates,
-          setDates,
-        }}
-      >
-        <ConfirmBoooking medicalCenterData={medicalCenterData} />
-      </MedifyContext.Provider>
+      <ConfirmBoooking medicalCenterData={medicalCenterData} />
     </div>
   );
 };

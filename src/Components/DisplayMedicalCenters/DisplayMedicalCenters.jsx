@@ -10,6 +10,8 @@ export default () => {
     medicalCentersData,
     selectedNavItem,
     bookings,
+    dates,
+    setDates,
   } = useContext(MedifyContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPagesAllowed, setMaxPagesAllowed] = useState(1);
@@ -28,6 +30,11 @@ export default () => {
     setStartingIndex((currentPage - 1) * 5);
     setEndingIndex((currentPage || 1) * 5);
   }, [currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    setVisibleBookingCenter(null);
+  }, [selectedNavItem]);
 
   useEffect(() => {
     if (selectedNavItem === "myBookings") {
@@ -168,7 +175,10 @@ export default () => {
                       ) : (
                         <div className="flex flex-col gap-[14px] justify-end mb-3 items-center">
                           <span className="text-[#01A400] text-[14px] font-medium">
-                            Available Today
+                            Available{" "}
+                            {dates[0]?.numberOfSlotsAvailable >= 1
+                              ? "Today"
+                              : ""}
                           </span>
                           <button
                             type="button"

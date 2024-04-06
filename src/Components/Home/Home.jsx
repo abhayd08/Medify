@@ -35,6 +35,7 @@ const Home = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [alertType, setAlertType] = useState(null);
   const [selectedNavItem, setSelectedNavItem] = useState(null);
+  const [dates, setDates] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -108,6 +109,8 @@ const Home = () => {
           setBookingToRemove,
           selectedNavItem,
           setSelectedNavItem,
+          dates,
+          setDates,
         }}
       >
         <Header />

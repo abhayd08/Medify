@@ -32,7 +32,33 @@ export default function ({ medicalCenterData }) {
 
   return (
     <>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        hideCloseButton={true}
+        motionProps={{
+          variants: {
+            enter: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 0.3,
+                ease: "easeOut",
+              },
+            },
+            exit: {
+              y: -20,
+              opacity: 0,
+              transition: {
+                duration: 0.2,
+                ease: "easeIn",
+              },
+            },
+          },
+        }}
+        isDismissable={false}
+        backdrop="blur"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {(onClose) => (
             <>
@@ -90,20 +116,9 @@ export default function ({ medicalCenterData }) {
                             },
                           ];
                         });
-                        // const dateWhereChangeNeeded = dates.find(
-                        //   (date) => date.date.id === selectedDate.date.id
-                        // );
-                        // console.log(dates.indexOf(dateWhereChangeNeeded))
-                        // setDates((prevDates) => {
-                        //   const datesData = [...prevDates];
-                        //   const index = datesData.indexOf(
-                        //     dateWhereChangeNeeded
-                        //   );
-                        //   datesData[index].date.numberOfSlotsAvailable -= 1;
-                        //   return datesData;
-                        // });
                         setSelectedSlot(null);
                         setAlertType(null);
+                        setBookingToRemove(null);
                         enqueueSnackbar("Slot booked.", { variant: "success" });
                         onClose();
                       }}
