@@ -62,7 +62,7 @@ export default () => {
             </div>
             <div
               onClick={() =>
-                enqueueSnackbar("Feature yet to implemented.", {
+                enqueueSnackbar("Feature yet to be implemented.", {
                   variant: "warning",
                 })
               }
@@ -72,7 +72,7 @@ export default () => {
             </div>
             <div
               onClick={() =>
-                enqueueSnackbar("Feature yet to implemented.", {
+                enqueueSnackbar("Feature yet to be implemented.", {
                   variant: "warning",
                 })
               }
@@ -82,7 +82,7 @@ export default () => {
             </div>
             <div
               onClick={() =>
-                enqueueSnackbar("Feature yet to implemented.", {
+                enqueueSnackbar("Feature yet to be implemented.", {
                   variant: "warning",
                 })
               }
@@ -92,7 +92,7 @@ export default () => {
             </div>
             <div
               onClick={() =>
-                enqueueSnackbar("Feature yet to implemented.", {
+                enqueueSnackbar("Feature yet to be implemented.", {
                   variant: "warning",
                 })
               }

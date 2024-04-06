@@ -33,6 +33,10 @@ export default function ({ medicalCenterData }) {
   return (
     <>
       <Modal
+      classNames={{
+        wrapper: "w-full h-full",
+        backdrop: "w-full h-full",
+      }}
         hideCloseButton={true}
         motionProps={{
           variants: {

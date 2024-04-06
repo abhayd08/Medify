@@ -36,6 +36,7 @@ const Home = () => {
   const [alertType, setAlertType] = useState(null);
   const [selectedNavItem, setSelectedNavItem] = useState(null);
   const [dates, setDates] = useState([]);
+  const [searchedHospital, setSearchedHospital] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -72,6 +73,16 @@ const Home = () => {
     }
     setLoadingContent("");
   }, []);
+
+  useEffect(() => {
+    setSearchedHospital(null);
+    if (document.getElementById("hospitalSearchInputBox")) {
+      document
+        .getElementById("hospitalSearchInputBox")
+        .removeAttribute("disabled");
+      document.getElementById("hospitalSearchInputBox").value = "";
+    }
+  }, [selectedNavItem]);
 
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(bookings));
@@ -111,6 +122,8 @@ const Home = () => {
           setSelectedNavItem,
           dates,
           setDates,
+          searchedHospital,
+          setSearchedHospital,
         }}
       >
         <Header />

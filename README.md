@@ -12,7 +12,7 @@ A React-based web application that allows users to find medical centers in a spe
 - Search section with dropdowns for selecting state and city to find medical centers.
 - Sections for Find Doctors, Hospitals, Medicines, and more.
 
-### Search Results Page:
+### Search Results:
 
 - Listings view displaying available medical centers in the selected location.
 - Option to book appointments directly from the search results.
@@ -23,10 +23,10 @@ A React-based web application that allows users to find medical centers in a spe
 - Calendar-like interface for choosing appointment dates within a one-week time frame.
 - Selection of available time slots for the chosen day.
 
-### My Bookings Page:
+### My Bookings Section:
 
 - Personalized page showing all user bookings.
-- Details include medical center's name, appointment date, and time.
+- Details include medical center's name and other details, appointment date, and time.
 
 ### Responsive Design:
 
@@ -36,7 +36,7 @@ A React-based web application that allows users to find medical centers in a spe
 
 ## Technologies
 
-#### Frontend: HTML, CSS, JavaScript, React, Tailwind CSS
+#### Frontend: HTML, CSS, JavaScript, React, Tailwind CSS, Next UI, Swiper.js
 
 #
 

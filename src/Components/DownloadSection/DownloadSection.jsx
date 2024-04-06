@@ -45,7 +45,7 @@ export default () => {
             Send SMS
           </button>
         </form>
-        <div className="flex justify-center mt-[50px] items-center flex-wrap pb-[70px] gap-[26px]">
+        <div className="flex justify-center md:ml-20 mt-[50px] items-center flex-wrap pb-[70px] gap-[26px]">
           <img
             className="cursor-pointer w-[200px] sm:w-[224px]"
             src="/assets/googlePlay.png"

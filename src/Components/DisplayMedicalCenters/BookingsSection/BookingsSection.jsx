@@ -245,7 +245,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
   };
 
   return (
-    <div className="border-t-[1px] animate__animated animate__bounceInLeft w-[786px] max-w-[95vw] mx-auto rounded-b-[15px] pb-[5px] border-[#efeff1]">
+    <div className="border-t-[1px] animate__animated animate__bounceInLeft w-[786px] fixedWidthContainers max-w-[95vw] mx-auto rounded-b-[15px] pb-[5px] border-[#efeff1]">
       <div className="bg-[#00A500] h-[5.25px] mx-auto w-[44px] -mt-[0.8px] rounded-[3.5px]"></div>
       <div className="mt-[20px] relative">
         <div
@@ -319,7 +319,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
           })}
         </Swiper>
       </div>
-      <div className="py-[20px] w-[95%] pl-5 mx-auto flex flex-wrap items-center border-b-[1px] border-solid border-[#F0F0F5] gap-[4px] gap-y-3">
+      <div className="py-[20px] fixedWidthContainers w-[95%] pl-5 mx-auto flex flex-wrap items-center border-b-[1px] border-solid border-[#F0F0F5] gap-[4px] gap-y-3">
         <div className="py-[13.5px] w-[110px] font-normal text-[14px] text-[#414146] leading-[19.6px]">
           Morning
         </div>

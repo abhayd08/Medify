@@ -30,7 +30,6 @@ body {
 }
 
 .mySwiper {
-  /* max-width: 99vw !important; */
   margin-left: 3rem !important;
   margin-right: 3rem !important;
 }
@@ -84,4 +83,9 @@ body {
   .heroImage {
     min-width: 300px;
   }
+}
+
+.next-ui-modal .h-[100dvh] {
+  width: 100% !important;
+  height: 100% !important;
 }

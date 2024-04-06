@@ -20,6 +20,8 @@ export default ({ component }) => {
     setMedicalCentersData,
     setSearchedLocation,
     selectedNavItem,
+    setSearchedHospital,
+    searchedHospital,
   } = useContext(MedifyContext);
 
   const [btnLoadingContent, setBtnLoadingContent] = useState("Search");
@@ -114,26 +116,61 @@ export default ({ component }) => {
             initial={{ opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.01 }}
             whileInView={{ opacity: 1 }}
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (
+                document.getElementById("hospitalSearchInputBox").value.trim()
+                  .length > 0
+              ) {
+                setSearchedHospital(
+                  document.getElementById("hospitalSearchInputBox").value
+                );
+                document
+                  .getElementById("hospitalSearchInputBox")
+                  .setAttribute("disabled", true);
+              } else {
+                enqueueSnackbar("Please enter the hospital name.", {
+                  variant: "warning",
+                });
+              }
+            }}
             className={`py-[27px] flex justify-center items-center gap-[20px] rounded-[15px] bg-[#FFFFFF] px-[20px] max-w-[96.5vw] w-[780px] ${styles.form}`}
           >
             <input
               placeholder="Search By Hospital"
+              required
               type="text"
+              id="hospitalSearchInputBox"
               className="rounded-[8px] focus:outline-[var(--color-primary)] border-[1px] pl-[25px] border-[#F0F0F0] h-[50px] w-[535px] bg-[#FAFBFE] text-[14px] leading-[21px] font-normal tracking-[0.02em]"
             />
-            <button
-              type="submit"
-              aria-label="Search"
-              className={` focus:outline-white pl-6 relative text-center tracking-[0.02em] font-medium rounded-[8px] bg-[var(--color-primary)] leading-[24px] text-base w-[177px] h-[50px] text-white`}
-            >
-              Search
-              <img
-                className="absolute left-[23%] w-[20.8px] top-[50%] translate-y-[-50%]"
-                src="/assets/searchIcon2.png"
-                alt="Search"
-              />
-            </button>
+            {searchedHospital !== null ? (
+              <div
+                onClick={() => {
+                  setSearchedHospital(null);
+                  document.getElementById("hospitalSearchInputBox").value = "";
+                  document
+                    .getElementById("hospitalSearchInputBox")
+                    .removeAttribute("disabled");
+                }}
+                aria-label="Search"
+                className={`focus:outline-white flex justify-center items-center cursor-pointer text-center tracking-[0.02em] font-medium rounded-[8px] bg-danger leading-[24px] text-base w-[177px] h-[50px] text-white`}
+              >
+                Reset
+              </div>
+            ) : (
+              <button
+                type="submit"
+                aria-label="Search"
+                className={` focus:outline-white pl-6 relative text-center tracking-[0.02em] font-medium rounded-[8px] bg-[var(--color-primary)] leading-[24px] text-base w-[177px] h-[50px] text-white`}
+              >
+                Search
+                <img
+                  className="absolute left-[23%] w-[20.8px] top-[50%] translate-y-[-50%]"
+                  src="/assets/searchIcon2.png"
+                  alt="Search"
+                />
+              </button>
+            )}
           </motion.form>
         </>
       ) : (

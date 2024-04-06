@@ -12,6 +12,7 @@ export default () => {
     bookings,
     dates,
     setDates,
+    searchedHospital,
   } = useContext(MedifyContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPagesAllowed, setMaxPagesAllowed] = useState(1);
@@ -37,14 +38,30 @@ export default () => {
   }, [selectedNavItem]);
 
   useEffect(() => {
-    if (selectedNavItem === "myBookings") {
+    if (selectedNavItem === "myBookings" && searchedHospital !== null) {
+      const matchingHospitals = bookings.filter((booking) =>
+        booking.medicalCenterData["Hospital Name"]
+          .toLowerCase()
+          .includes(searchedHospital.toLowerCase())
+      );
+      console.log(matchingHospitals);
+      setMaxPagesAllowed(Math.ceil(matchingHospitals.length / 5) || 1);
+      setCurrentItems(matchingHospitals.slice(startingIndex, endingIndex));
+    } else if (selectedNavItem === "myBookings" && searchedHospital === null) {
       setMaxPagesAllowed(Math.ceil(bookings.length / 5) || 1);
-      setCurrentItems(bookings.slice(startingIndex, endingIndex));
+      setCurrentItems(bookings.reverse().slice(startingIndex, endingIndex));
     } else {
       setMaxPagesAllowed(Math.ceil(medicalCentersData.length / 5) || 1);
       setCurrentItems(medicalCentersData.slice(startingIndex, endingIndex));
     }
-  }, [medicalCentersData, startingIndex, endingIndex, selectedNavItem]);
+  }, [
+    medicalCentersData,
+    startingIndex,
+    endingIndex,
+    selectedNavItem,
+    bookings,
+    searchedHospital,
+  ]);
 
   return (
     <div
@@ -77,15 +94,14 @@ export default () => {
               </div>
             </div>
           )}
-          <div className="max-w-[98vw] w-[786px] gap-[25px] flex flex-col">
+          <div className="max-w-[98vw] fixedWidthContainers w-[786px] mx-auto gap-[25px] flex flex-col">
             {currentItems.map((medicalCenterData) => {
               return (
                 <div
                   key={
-                    medicalCenterData?.["Provider ID"] ||
-                    medicalCenterData?.medicalCenterData?.["Provider ID"]
+                    medicalCenterData?.["Provider ID"] || medicalCenterData?.id
                   }
-                  className="max-w-[98vw] bg-white w-[786px] rounded-[15px]"
+                  className="max-w-[98vw] fixedWidthContainers bg-white w-[786px] rounded-[15px]"
                 >
                   <div className="p-[24px] pb-[30px]">
                     <div className="flex flex-col flex-wrap gap-x-[5px] lg:flex-row lg:flex-nowrap lg:justify-between gap-y-8">
@@ -240,9 +256,12 @@ export default () => {
                 </div>
               );
             })}
-            {selectedNavItem !== "myBookings" && currentItems.length < 1 ? (
+            {(selectedNavItem !== "myBookings" && currentItems.length < 1) ||
+            (selectedNavItem === "myBookings" &&
+              currentItems.length < 1 &&
+              searchedHospital !== null) ? (
               <h6 className="rounded-[15px] px-2 font-medium  py-[40px] bg-white">
-                Oops! We couldn't find any matching search results. &nbsp;
+                Oops! We couldn't find any matching search results.
                 <span className="text-[var(--color-primary)]">
                   {" "}
                   Please try refining your search criteria and try again.
@@ -251,9 +270,11 @@ export default () => {
             ) : (
               ""
             )}
-            {selectedNavItem === "myBookings" && currentItems.length < 1 ? (
+            {selectedNavItem === "myBookings" &&
+            currentItems.length < 1 &&
+            searchedHospital === null ? (
               <h6 className="rounded-[15px] px-2 font-medium  py-[40px] bg-white">
-                Looks like you haven't made any bookings yet. &nbsp;
+                Looks like you haven't made any bookings yet.
                 <span className="text-[var(--color-primary)]">
                   {" "}
                   Start exploring and book your first appointment today!
