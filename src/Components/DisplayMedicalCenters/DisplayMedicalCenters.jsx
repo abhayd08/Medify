@@ -9,6 +9,7 @@ export default () => {
     searchedLocation,
     medicalCentersData,
     selectedNavItem,
+    bookings,
   } = useContext(MedifyContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPagesAllowed, setMaxPagesAllowed] = useState(1);
@@ -29,9 +30,14 @@ export default () => {
   }, [currentPage]);
 
   useEffect(() => {
-    setMaxPagesAllowed(Math.ceil(medicalCentersData.length / 5));
-    setCurrentItems(medicalCentersData.slice(startingIndex, endingIndex));
-  }, [medicalCentersData, startingIndex, endingIndex]);
+    if (selectedNavItem === "myBookings") {
+      setMaxPagesAllowed(Math.ceil(bookings.length / 5) || 1);
+      setCurrentItems(bookings.slice(startingIndex, endingIndex));
+    } else {
+      setMaxPagesAllowed(Math.ceil(medicalCentersData.length / 5) || 1);
+      setCurrentItems(medicalCentersData.slice(startingIndex, endingIndex));
+    }
+  }, [medicalCentersData, startingIndex, endingIndex, selectedNavItem]);
 
   return (
     <div
@@ -40,74 +46,81 @@ export default () => {
           "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
       }}
     >
-      <div className="max-w-[1200px] pb-[120px] justify-evenly gap-x-4 flex flex-wrap mx-auto pt-[90px]">
+      <div className="max-w-[1200px] pb-[120px] justify-evenly gap-x-4 gap-y-14 flex flex-wrap mx-auto pt-[90px]">
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col px-3 gap-3">
-            <h4 className="font-medium text-2xl leading-[36px] text-black">
-              {medicalCentersData.length} medical{" "}
-              {medicalCentersData.length === 1 ? "center" : "centers"} available
-              in {searchedLocation}
-            </h4>
-            <div className="flex gap-5">
-              <img
-                className="w-[21.23px] h-[19.62px]"
-                src="/assets/verified.png"
-                alt="Verified"
-              />
-              <span className="font-normal text-base leading-[24px] text-[#787887]">
-                Book appointments with minimum wait-time & verified doctor
-                details
-              </span>
+          {selectedNavItem === "myBookings" ? (
+            ""
+          ) : (
+            <div className="flex flex-col px-3 gap-3">
+              <h4 className="font-medium text-2xl leading-[36px] text-black">
+                {medicalCentersData?.length} medical{" "}
+                {medicalCentersData?.length === 1 ? "center" : "centers"}{" "}
+                available in {searchedLocation}
+              </h4>
+              <div className="flex gap-5">
+                <img
+                  className="w-[21.23px] h-[19.62px]"
+                  src="/assets/verified.png"
+                  alt="Verified"
+                />
+                <span className="font-normal text-base leading-[24px] text-[#787887]">
+                  Book appointments with minimum wait-time & verified doctor
+                  details
+                </span>
+              </div>
             </div>
-          </div>
+          )}
           <div className="max-w-[98vw] w-[786px] gap-[25px] flex flex-col">
             {currentItems.map((medicalCenterData) => {
               return (
                 <div
-                  key={medicalCenterData["Provider ID"]}
+                  key={
+                    medicalCenterData?.["Provider ID"] ||
+                    medicalCenterData?.medicalCenterData?.["Provider ID"]
+                  }
                   className="max-w-[98vw] bg-white w-[786px] rounded-[15px]"
                 >
-                  <div
-                    key={medicalCenterData["Provider ID"]}
-                    className="p-[24px] pb-[30px]"
-                  >
-                    <div
-                      className="flex flex-col flex-wrap gap-x-[5px] lg:flex-row lg:flex-nowrap lg:justify-between gap-y-16"
-                      key={medicalCenterData["Provider ID"]}
-                    >
-                      <div className="flex gap-[36px] gap-y-[20px] flex-wrap pt-[21px] pb-[2px]">
+                  <div className="p-[24px] pb-[30px]">
+                    <div className="flex flex-col flex-wrap gap-x-[5px] lg:flex-row lg:flex-nowrap lg:justify-between gap-y-8">
+                      <div className="flex gap-[36px] gap-y-[20px] flex-wrap pt-[21px]">
                         <div className="w-[124px] relative flex justify-center items-center h-[124px] rounded-full bg-[#8CCFFF]">
                           <img
-                            src="/assets//medicalCenter.png"
+                            src="/assets/medicalCenter.png"
                             className="w-[80px] h-[80px]"
                             alt="Medical Center"
                           />
                           <img
-                            src="/assets//verifiedBlue.png"
+                            src="/assets/verifiedBlue.png"
                             className="w-[20px] h-[20px] absolute top-[65%] right-[-7px] translate-y-[-50%]"
                             alt="Verified"
                           />
                         </div>
-                        <div className="flex pt-[22px] lg:max-w-[350px] flex-col gap-[18px]">
+                        <div className="flex pt-[22px] flex-col gap-[18px]">
                           <h4 className="font-semibold text-[20px] text-[#14BEF0] leading-[28px]">
-                            {medicalCenterData["Hospital Name"]}
+                            {medicalCenterData?.["Hospital Name"] ||
+                              medicalCenterData?.medicalCenterData?.[
+                                "Hospital Name"
+                              ]}
                           </h4>
                           <div className="flex flex-col justify-center pb-4 gap-[14px]">
                             <div className="flex flex-col gap-[0.3rem]">
                               <span className="text-[#414146] font-bold text-[14px]">
-                                {medicalCenterData["City"]},{" "}
-                                {medicalCenterData["State"]}
+                                {selectedNavItem !== "myBookings"
+                                  ? `${medicalCenterData?.["City"]}, ${medicalCenterData?.["State"]}`
+                                  : `${medicalCenterData?.medicalCenterData?.City}, ${medicalCenterData?.medicalCenterData?.State}`}
                               </span>
                               <span className="text-[#414146] font-normal text-[14px]">
-                                {medicalCenterData["Hospital Type"]}
+                                {medicalCenterData?.["Hospital Type"] ||
+                                  medicalCenterData?.medicalCenterData?.[
+                                    "Hospital Type"
+                                  ]}
                               </span>
                             </div>
-
                             <div
                               className={`flex flex-wrap gap-y-0 gap-[5px] ${
                                 selectedNavItem === "myBookings"
-                                  ? "invisible"
-                                  : "visible"
+                                  ? "hidden"
+                                  : "flex"
                               }`}
                             >
                               <span className="text-[#02A401] text-[14px] font-bold">
@@ -121,8 +134,10 @@ export default () => {
                               </span>
                             </div>
                           </div>
-
-                          {typeof medicalCenterData[
+                          {typeof medicalCenterData?.[
+                            "Hospital overall rating"
+                          ] === "number" ||
+                          typeof medicalCenterData?.medicalCenterData?.[
                             "Hospital overall rating"
                           ] === "number" ? (
                             <div
@@ -135,7 +150,12 @@ export default () => {
                                   className="w-[14px] h-[14px]"
                                   alt="Likes"
                                 />
-                                {medicalCenterData["Hospital overall rating"]}
+                                {medicalCenterData?.[
+                                  "Hospital overall rating"
+                                ] ||
+                                  medicalCenterData?.medicalCenterData?.[
+                                    "Hospital overall rating"
+                                  ]}
                               </div>
                             </div>
                           ) : (
@@ -143,34 +163,63 @@ export default () => {
                           )}
                         </div>
                       </div>
-                      <div className="flex flex-col gap-[14px] justify-end mb-3 items-center">
-                        <span className="text-[#01A400] text-[14px] font-medium">
-                          Available Today
-                        </span>
-                        <button
-                          type="button"
-                          aria-label="Book"
-                          onClick={() =>
-                            toggleBookingSectionVisibility(
-                              medicalCenterData["Provider ID"]
-                            )
-                          }
-                          className={`focus:outline-white flex justify-center items-center text-center rounded-[4px] ${
-                            visibleBookingCenter ===
-                            medicalCenterData["Provider ID"]
-                              ? "bg-danger"
-                              : "bg-[#2AA7FF]"
-                          } text-[14px] w-[212px] h-[40px] text-white`}
-                        >
-                          {visibleBookingCenter ===
-                          medicalCenterData["Provider ID"]
-                            ? "Hide Booking Section"
-                            : "Book FREE Center Visit"}
-                        </button>
-                      </div>
+                      {selectedNavItem === "myBookings" ? (
+                        ""
+                      ) : (
+                        <div className="flex flex-col gap-[14px] justify-end mb-3 items-center">
+                          <span className="text-[#01A400] text-[14px] font-medium">
+                            Available Today
+                          </span>
+                          <button
+                            type="button"
+                            aria-label="Book"
+                            onClick={() =>
+                              toggleBookingSectionVisibility(
+                                medicalCenterData?.["Provider ID"]
+                              )
+                            }
+                            className={`focus:outline-white flex justify-center items-center text-center rounded-[4px] ${
+                              visibleBookingCenter ===
+                              medicalCenterData?.["Provider ID"]
+                                ? "bg-danger"
+                                : "bg-[#2AA7FF]"
+                            } text-[14px] w-[212px] h-[40px] text-white`}
+                          >
+                            {visibleBookingCenter ===
+                            medicalCenterData?.["Provider ID"]
+                              ? "Hide Booking Section"
+                              : "Book FREE Center Visit"}
+                          </button>
+                        </div>
+                      )}
+                      {selectedNavItem === "myBookings" ? (
+                        <div className="flex pt-9 gap-[14px] justify-center mb-2 items-center">
+                          <span className="text-[#2AA7FF] py-[7.5px] text-sm leading-[19.6px] text-center border-solid border-[1px] border-[#2AA7FF] text-[14px] rounded-[3px] w-[84px] font-normal">
+                            {medicalCenterData?.slot?.timing}
+                          </span>
+                          <span className="text-[#007100] py-[8px] text-sm leading-[19.6px] text-center border-solid border-[1px] border-[#00A500] text-[14px] rounded-[3px] w-[128px] font-bold">
+                            {new Date(
+                              medicalCenterData?.date?.date
+                            ).toLocaleDateString("en-US", {
+                              day: "numeric",
+                            })}{" "}
+                            {new Date(
+                              medicalCenterData?.date?.date
+                            ).toLocaleDateString("en-US", {
+                              month: "long",
+                            })}{" "}
+                            {new Date(
+                              medicalCenterData?.date?.date
+                            ).toLocaleDateString("en-US", { year: "numeric" })}
+                          </span>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
-                  {visibleBookingCenter === medicalCenterData["Provider ID"] ? (
+                  {visibleBookingCenter === medicalCenterData["Provider ID"] &&
+                  selectedNavItem !== "myBookings" ? (
                     <BookingsSection
                       visibleBookingCenter={visibleBookingCenter}
                       medicalCenterData={medicalCenterData}
@@ -181,6 +230,28 @@ export default () => {
                 </div>
               );
             })}
+            {selectedNavItem !== "myBookings" && currentItems.length < 1 ? (
+              <h6 className="rounded-[15px] px-2 font-medium  py-[40px] bg-white">
+                Oops! We couldn't find any matching search results. &nbsp;
+                <span className="text-[var(--color-primary)]">
+                  {" "}
+                  Please try refining your search criteria and try again.
+                </span>
+              </h6>
+            ) : (
+              ""
+            )}
+            {selectedNavItem === "myBookings" && currentItems.length < 1 ? (
+              <h6 className="rounded-[15px] px-2 font-medium  py-[40px] bg-white">
+                Looks like you haven't made any bookings yet. &nbsp;
+                <span className="text-[var(--color-primary)]">
+                  {" "}
+                  Start exploring and book your first appointment today!
+                </span>
+              </h6>
+            ) : (
+              ""
+            )}
             <div className="rounded-[15px] py-[24px] flex-wrap gap-[8px] flex justify-center items-center bg-white">
               <div
                 onClick={() => (currentPage > 1 ? setCurrentPage(1) : "")}
@@ -276,7 +347,9 @@ export default () => {
           </div>
         </div>
         <img
-          className="w-[363px] h-[268px] mt-[96px]"
+          className={`w-[363px] h-[268px] ${
+            selectedNavItem === "myBookings" ? "mt-0" : "mt-[96px]"
+          }`}
           src="/assets/banner.png"
           alt="Banner"
         />

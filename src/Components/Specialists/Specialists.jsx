@@ -62,7 +62,7 @@ export default () => {
         >
           {specialists.map((specialist) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={specialist.name}>
                 <img
                   src={specialist.specialistSrc}
                   className="max-w-[370px] max-h-[504px]"

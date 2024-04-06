@@ -74,7 +74,6 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
   useEffect(() => {
     setDates([]);
     const currentDate = new Date();
-    currentDate.setHours(currentDate.getHours() + 12);
 
     setDates((prevDates) => [
       ...prevDates,
@@ -214,8 +213,6 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
       }
     });
   }, [slotsAvaliable, dates]);
-
-  console.log(dates);
 
   const isSlotAlreadyBookedFn = (bookings, slot, medicalCenterData) => {
     let isSlotAlreadyBooked = false;

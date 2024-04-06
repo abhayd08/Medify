@@ -7,12 +7,12 @@ import { Autoplay, Pagination } from "swiper/modules";
 import styles from "./OffersSection.module.css";
 
 const offers = [
-  { offerSrc: "/assets/offer1.png" },
-  { offerSrc: "/assets/offer2.png" },
-  { offerSrc: "/assets/offer1.png" },
-  { offerSrc: "/assets/offer2.png" },
-  { offerSrc: "/assets/offer1.png" },
-  { offerSrc: "/assets/offer2.png" },
+  { offerSrc: "/assets/offer2.png", id: "offer1" },
+  { offerSrc: "/assets/offer1.png", id: "offer2" },
+  { offerSrc: "/assets/offer1.png", id: "offer3" },
+  { offerSrc: "/assets/offer2.png", id: "offer4" },
+  { offerSrc: "/assets/offer1.png", id: "offer5" },
+  { offerSrc: "/assets/offer2.png", id: "offer6" },
 ];
 
 export default () => {
@@ -45,7 +45,7 @@ export default () => {
       >
         {offers.map((offer) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={offer.id}>
               <img src={offer.offerSrc} alt="Offer" />
             </SwiperSlide>
           );

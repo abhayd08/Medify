@@ -58,10 +58,23 @@ const Home = () => {
         // setCities([]);
         // setMedicalCentersData([]);
         // setSearchedLocation(null);
-        setLoadingContent("");
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("bookings")) {
+      setBookings(JSON.parse(localStorage.getItem("bookings")));
+    } else {
+      setBookings([]);
+      localStorage.setItem("bookings", JSON.stringify([])); // <-- Fix here
+    }
+    setLoadingContent("");
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+  }, [bookings]);
 
   return (
     <>
@@ -101,7 +114,11 @@ const Home = () => {
         {selectedNavItem !== null ? <SubHeader /> : ""}
         {selectedNavItem === null ? <HeroSection /> : ""}
         {selectedNavItem === null ? <SearchCateorySelector /> : ""}
-        {medicalCentersData.length > 0 || selectedNavItem === "myBookings" ? <DisplayMedicalCenters /> : ""}
+        {medicalCentersData.length > 0 || selectedNavItem === "myBookings" ? (
+          <DisplayMedicalCenters />
+        ) : (
+          ""
+        )}
         {selectedNavItem === null ? <OffersSection /> : ""}
         {selectedNavItem === null ? <Specialisations /> : ""}
         {selectedNavItem === null ? <Specialists /> : ""}
