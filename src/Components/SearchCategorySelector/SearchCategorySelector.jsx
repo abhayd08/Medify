@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import MedifyContext from "../Contexts/MedifyContext";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
+import { motion } from "framer-motion";
 
 export default () => {
   const {
@@ -48,8 +49,23 @@ export default () => {
           setSearchedLocation(
             selectedCity !== "City" ? selectedCity : selectedState
           );
+
+          const timer = setTimeout(() => {
+            const displayMedicalCenters = document.getElementById(
+              "displayMedicalCenters"
+            );
+            if (displayMedicalCenters) {
+              displayMedicalCenters.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 0);
+
+          return () => clearTimeout(timer);
         } catch (error) {
           console.log(error);
+          enqueueSnackbar(
+            "There is an issue loading the medical centers. Please refresh the page or try again later.",
+            { variant: "error" }
+          );
           setSelectedCity("City");
           setMedicalCentersData([]);
           setSearchedLocation(null);
@@ -91,7 +107,7 @@ export default () => {
   };
 
   return (
-    <div className="relative pb-2">
+    <div id="searchCategorySelector" className="relative">
       <div
         className="h-[70%] w-[100%] absolute top-0 -z-10"
         style={{
@@ -99,7 +115,16 @@ export default () => {
             "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
         }}
       ></div>
-      <div
+      <motion.div
+        whileInView={{
+          y: -2,
+          transition: {
+            duration: 1,
+          },
+        }}
+        initial={{
+          y: -55,
+        }}
         style={{ boxShadow: "6px 6px 35px 0px #1028511C" }}
         className="max-w-[1170px] flex flex-col gap-[70px] bg-white border-[#F0F0F0] border-[1px] rounded-[15px] py-[55px] mx-auto"
       >
@@ -203,9 +228,10 @@ export default () => {
             type="submit"
             id="fetchMedicalCentersBtn"
             aria-label="Search"
+            role="button"
             className={`relative ${
               btnLoadingContent === "Search" ? "pl-5" : "pl-0"
-            }  focus:outline-white flex justify-center items-center text-center rounded-[8px] bg-[var(--color-primary)] text-sm w-[125px] h-[50px] text-white`}
+            }  focus:outline-white flex justify-center itemsToGetHoverEffect items-center text-center rounded-[8px] bg-[var(--color-primary)] text-sm w-[125px] h-[50px] text-white`}
           >
             {btnLoadingContent}
             <img
@@ -241,10 +267,7 @@ export default () => {
                 Labs
               </span>
             </div>
-            <div
-              style={{ border: "1px solid #2AA7FF" }}
-              className="w-[203px] bg-[#2AA7FF14] h-[153px] rounded-[8px] flex flex-col gap-[15px] justify-center items-center"
-            >
+            <div className="w-[203px] bg-[#2AA7FF14] border-[1px] border-solid border-[#2AA7FF] h-[153px] rounded-[8px] flex flex-col gap-[15px] justify-center items-center">
               <img
                 src="/assets/hospital.png"
                 className="w-[60px] h-[60px]"
@@ -276,7 +299,7 @@ export default () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

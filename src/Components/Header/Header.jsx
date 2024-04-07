@@ -1,5 +1,5 @@
 import { enqueueSnackbar } from "notistack";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styles from "./Header.module.css";
 import MedifyContext from "../Contexts/MedifyContext";
 
@@ -39,7 +39,9 @@ export default () => {
                 });
               }}
               className={`cursor-pointer relative ${
-                selectedNavItem === "findDoctors" ? styles.navItem1 : ""
+                selectedNavItem === "findDoctors"
+                  ? styles.navItem1
+                  : styles.navItems
               }`}
             >
               Find Doctors
@@ -55,7 +57,9 @@ export default () => {
                 });
               }}
               className={`cursor-pointer relative ${
-                selectedNavItem === "hospitals" ? styles.navItem2 : ""
+                selectedNavItem === "hospitals"
+                  ? styles.navItem2
+                  : styles.navItems
               }`}
             >
               Hospitals
@@ -66,7 +70,7 @@ export default () => {
                   variant: "warning",
                 })
               }
-              className="hidden md:flex cursor-pointer"
+              className={`hidden md:flex ${styles.navItems} cursor-pointer`}
             >
               Medicines
             </div>
@@ -76,7 +80,7 @@ export default () => {
                   variant: "warning",
                 })
               }
-              className="hidden lg:flex cursor-pointer"
+              className={`hidden lg:flex ${styles.navItems} cursor-pointer`}
             >
               Surgeries
             </div>
@@ -86,7 +90,7 @@ export default () => {
                   variant: "warning",
                 })
               }
-              className="hidden xl:flex cursor-pointer"
+              className={`hidden xl:flex ${styles.navItems} cursor-pointer`}
             >
               Software for Provider
             </div>
@@ -96,7 +100,7 @@ export default () => {
                   variant: "warning",
                 })
               }
-              className="hidden xl:flex cursor-pointer"
+              className={`hidden xl:flex ${styles.navItems} cursor-pointer`}
             >
               Facilities
             </div>
@@ -111,7 +115,9 @@ export default () => {
                 }
               });
             }}
-            className={`w-[130px] border-0 outline-0 h-[40px] leading-[8px] rounded-[8px] text-center text-white ${
+            className={`w-[130px] ${
+              styles.navItems
+            } border-0 outline-0 h-[40px] leading-[8px] rounded-[8px] text-center text-white ${
               selectedNavItem === "myBookings"
                 ? "bg-danger"
                 : "bg-[var(--color-primary)]"

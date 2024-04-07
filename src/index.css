@@ -27,6 +27,11 @@ select {
 body {
   box-sizing: border-box;
   font-family: var(--font-primary);
+  /* background: linear-gradient(
+    81deg,
+    #e7f0ff 9.01%,
+    rgba(232, 241, 255, 0.47) 89.11%
+  ); */
 }
 
 .mySwiper {
@@ -39,6 +44,11 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+.itemsToGetHoverEffect:hover {
+  transform: translateY(-0.1rem);
+  transition: 0.25s ease-in-out;
 }
 
 @media (min-width: 1050px) {
@@ -83,9 +93,4 @@ body {
   .heroImage {
     min-width: 300px;
   }
-}
-
-.next-ui-modal .h-[100dvh] {
-  width: 100% !important;
-  height: 100% !important;
 }

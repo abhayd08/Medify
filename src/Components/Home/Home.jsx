@@ -1,7 +1,6 @@
 import Header from "../Header/Header";
 import HeroSection from "../HeroSection/HeroSection";
-import SearchCateorySelector from "../SearchCateorySelector/SearchCateorySelector";
-import styles from "./Home.module.css";
+import SearchCategorySelector from "../SearchCategorySelector/SearchCategorySelector";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MedifyContext from "../Contexts/MedifyContext";
@@ -55,11 +54,19 @@ const Home = () => {
         );
         console.log(error);
       } finally {
-        // setSelectedState("State");
-        // setSelectedCity("City");
-        // setCities([]);
-        // setMedicalCentersData([]);
-        // setSearchedLocation(null);
+        setSelectedState("State");
+        setSelectedCity("City");
+        setCities([]);
+        setSearchedLocation(null);
+        setMedicalCentersData([]);
+        setSearchedHospital(null);
+        setAlertType(null);
+        setSelectedNavItem(null);
+        setBookingToRemove(null);
+        setDates([]);
+        setSelectedDate({});
+        setSelectedSlot(null);
+        setLoadingContent("");
       }
     })();
   }, []);
@@ -69,9 +76,8 @@ const Home = () => {
       setBookings(JSON.parse(localStorage.getItem("bookings")));
     } else {
       setBookings([]);
-      localStorage.setItem("bookings", JSON.stringify([])); // <-- Fix here
+      localStorage.setItem("bookings", JSON.stringify([]));
     }
-    setLoadingContent("");
   }, []);
 
   useEffect(() => {
@@ -129,7 +135,7 @@ const Home = () => {
         <Header />
         {selectedNavItem !== null ? <SubHeader /> : ""}
         {selectedNavItem === null ? <HeroSection /> : ""}
-        {selectedNavItem === null ? <SearchCateorySelector /> : ""}
+        {selectedNavItem === null ? <SearchCategorySelector /> : ""}
         {medicalCentersData.length > 0 || selectedNavItem === "myBookings" ? (
           <DisplayMedicalCenters />
         ) : (
@@ -142,7 +148,7 @@ const Home = () => {
       {selectedNavItem === null ? <Features /> : ""}
       {selectedNavItem === null ? <News /> : ""}
       {selectedNavItem === null ? <Achievements /> : ""}
-      {selectedNavItem === null ? <FAQs /> : ""}
+      {selectedNavItem !== "myBookings" ? <FAQs /> : ""}
       <DownloadSection />
       <Footer />
     </>

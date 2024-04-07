@@ -8,6 +8,7 @@ import { Mousewheel, Keyboard } from "swiper/modules";
 import MedifyContext from "../../Contexts/MedifyContext";
 import ConfirmBoooking from "./ConfirmBoooking";
 import { enqueueSnackbar } from "notistack";
+import { motion } from "framer-motion";
 
 export default ({ medicalCenterData, visibleBookingCenter }) => {
   const {
@@ -245,7 +246,18 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
   };
 
   return (
-    <div className="border-t-[1px] animate__animated animate__bounceInLeft w-[786px] fixedWidthContainers max-w-[95vw] mx-auto rounded-b-[15px] pb-[5px] border-[#efeff1]">
+    <motion.div
+      whileInView={{
+        y: 0,
+        transition: {
+          duration: 0.35,
+        },
+      }}
+      initial={{
+        y: -30,
+      }}
+      className="border-t-[1px] w-[786px] fixedWidthContainers max-w-[95vw] mx-auto rounded-b-[15px] pb-[5px] border-[#efeff1]"
+    >
       <div className="bg-[#00A500] h-[5.25px] mx-auto w-[44px] -mt-[0.8px] rounded-[3.5px]"></div>
       <div className="mt-[20px] relative">
         <div
@@ -618,6 +630,6 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
         </div>
       </div>
       <ConfirmBoooking medicalCenterData={medicalCenterData} />
-    </div>
+    </motion.div>
   );
 };

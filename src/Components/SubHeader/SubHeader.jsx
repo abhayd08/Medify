@@ -4,7 +4,6 @@ import { useContext, useState } from "react";
 import MedifyContext from "../Contexts/MedifyContext";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
-import { motion } from "framer-motion";
 
 export default ({ component }) => {
   const {
@@ -18,6 +17,7 @@ export default ({ component }) => {
     loadingContent,
     setLoadingContent,
     setMedicalCentersData,
+    medicalCentersData,
     setSearchedLocation,
     selectedNavItem,
     setSearchedHospital,
@@ -55,6 +55,10 @@ export default ({ component }) => {
           );
         } catch (error) {
           console.log(error);
+          enqueueSnackbar(
+            "There is an issue loading the medical centers. Please refresh the page or try again later.",
+            { variant: "error" }
+          );
           setSelectedCity("City");
           setMedicalCentersData([]);
           setSearchedLocation(null);
@@ -97,25 +101,23 @@ export default ({ component }) => {
 
   return (
     <div
-      className={`px-2 relative gap-[60px] animate__animated animate__fadeInLeft gap-y-0 flex justify-center items-center ${styles.container}`}
+      className={`px-2 relative gap-[60px] animate__animated animate__bounceInDown gap-y-0 flex justify-center items-center ${
+        selectedNavItem !== null &&
+        selectedNavItem !== "myBookings" &&
+        medicalCentersData.length < 1
+          ? "bg-white"
+          : styles.container
+      }`}
     >
       {selectedNavItem === "myBookings" ? (
         <>
           <div
             className={`absolute top-0 -z-10 w-[100%] rounded-b-[16px] ${styles.coloredBox}`}
           ></div>
-          <motion.h4
-            initial={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.01 }}
-            whileInView={{ opacity: 1 }}
-            className="font-bold text-[35px] h-[80px] flex justify-center sm:text-[40px] leading-[45px] sm:leading-[50px] text-center text-white"
-          >
+          <h4 className="font-bold text-[35px] h-[80px] flex justify-center sm:text-[40px] leading-[45px] sm:leading-[50px] text-center text-white">
             My Bookings
-          </motion.h4>
-          <motion.form
-            initial={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.01 }}
-            whileInView={{ opacity: 1 }}
+          </h4>
+          <form
             onSubmit={(e) => {
               e.preventDefault();
               if (
@@ -171,17 +173,14 @@ export default ({ component }) => {
                 />
               </button>
             )}
-          </motion.form>
+          </form>
         </>
       ) : (
         <>
           <div
             className={`absolute top-0 -z-10 w-[100%] rounded-b-[16px] ${styles.coloredBox2}`}
           ></div>
-          <motion.form
-            initial={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.01 }}
-            whileInView={{ opacity: 1 }}
+          <form
             onSubmit={(e) =>
               fetchMedicalCenters(e, selectedState, selectedCity)
             }
@@ -299,7 +298,7 @@ export default ({ component }) => {
                 alt="Search"
               />
             </button>
-          </motion.form>
+          </form>
         </>
       )}
     </div>

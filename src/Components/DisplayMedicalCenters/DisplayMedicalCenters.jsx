@@ -65,10 +65,20 @@ export default () => {
 
   return (
     <div
+    whileInView={{
+      y: 0,
+      transition: {
+        duration: 1,
+      },
+    }}
+    initial={{
+      y: -50,
+    }}
       style={{
         background:
           "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
       }}
+      id="displayMedicalCenters"
     >
       <div className="max-w-[1200px] pb-[120px] justify-evenly gap-x-4 gap-y-14 flex flex-wrap mx-auto pt-[90px]">
         <div className="flex flex-col gap-6">
