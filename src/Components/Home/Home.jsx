@@ -54,18 +54,18 @@ const Home = () => {
         );
         console.log(error);
       } finally {
-        setSelectedState("State");
-        setSelectedCity("City");
-        setCities([]);
-        setSearchedLocation(null);
-        setMedicalCentersData([]);
-        setSearchedHospital(null);
-        setAlertType(null);
-        setSelectedNavItem(null);
-        setBookingToRemove(null);
-        setDates([]);
-        setSelectedDate({});
-        setSelectedSlot(null);
+        // setSelectedState("State");
+        // setSelectedCity("City");
+        // setCities([]);
+        // setSearchedLocation(null);
+        // setMedicalCentersData([]);
+        // setSearchedHospital(null);
+        // setAlertType(null);
+        // setSelectedNavItem(null);
+        // setBookingToRemove(null);
+        // setDates([]);
+        // setSelectedDate({});
+        // setSelectedSlot(null);
         setLoadingContent("");
       }
     })();

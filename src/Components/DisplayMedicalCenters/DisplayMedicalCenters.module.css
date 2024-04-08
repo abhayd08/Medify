@@ -1,0 +1,11 @@
+@media (max-width: 1172px) {
+  .offerBanner {
+    margin-top: 0 !important;
+  }
+
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}

@@ -33,10 +33,10 @@ export default function ({ medicalCenterData }) {
   return (
     <>
       <Modal
-      classNames={{
-        wrapper: "w-full h-full",
-        backdrop: "w-full h-full",
-      }}
+        classNames={{
+          wrapper: "w-full h-full",
+          backdrop: "w-full h-full",
+        }}
         hideCloseButton={true}
         motionProps={{
           variants: {
@@ -49,7 +49,7 @@ export default function ({ medicalCenterData }) {
               },
             },
             exit: {
-              y: -30,
+              y: -35,
               opacity: 0,
               transition: {
                 duration: 0.2,
@@ -96,6 +96,7 @@ export default function ({ medicalCenterData }) {
                   <ModalFooter>
                     <Button
                       color="danger"
+                      className="itemsToGetHoverEffect"
                       variant="light"
                       onPress={() => {
                         setSelectedSlot(null);
@@ -107,7 +108,7 @@ export default function ({ medicalCenterData }) {
                     </Button>
                     <Button
                       color="primary"
-                      className="bg-[var(--color-primary)] data-[focus=true]:opacity-100 hover:opacity-100 data-[hover=true]:opacity-100"
+                      className="bg-[var(--color-primary)] itemsToGetHoverEffect"
                       onPress={() => {
                         setBookings((prevBookings) => {
                           return [
@@ -146,6 +147,7 @@ export default function ({ medicalCenterData }) {
                     <Button
                       color="danger"
                       variant="light"
+                      className="itemsToGetHoverEffect"
                       onPress={() => {
                         setSelectedSlot(null);
                         setAlertType(null);
@@ -157,7 +159,7 @@ export default function ({ medicalCenterData }) {
                     </Button>
                     <Button
                       color="primary"
-                      className="bg-danger data-[focus=true]:opacity-100 data-[hover=true]:opacity-100"
+                      className="bg-danger itemsToGetHoverEffect"
                       onPress={() => {
                         setBookings((prevBookings) => {
                           const updatedBookings = prevBookings.filter(

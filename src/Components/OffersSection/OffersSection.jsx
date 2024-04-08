@@ -41,7 +41,7 @@ export default () => {
           pagination={{
             clickable: true,
           }}
-          className="pb-24"
+          className="offersSwiper"
           spaceBetween={20}
           breakpoints={{
             0: {

@@ -3,6 +3,7 @@ import { CircularProgress } from "@nextui-org/react";
 import { useContext, useState } from "react";
 import MedifyContext from "../Contexts/MedifyContext";
 import axios from "axios";
+import { motion } from "framer-motion";
 import { enqueueSnackbar } from "notistack";
 
 export default ({ component }) => {
@@ -114,10 +115,30 @@ export default ({ component }) => {
           <div
             className={`absolute top-0 -z-10 w-[100%] rounded-b-[16px] ${styles.coloredBox}`}
           ></div>
-          <h4 className="font-bold text-[35px] h-[80px] flex justify-center sm:text-[40px] leading-[45px] sm:leading-[50px] text-center text-white">
+          <motion.h4
+            whileInView={{
+              y: 0,
+              transition: {
+                duration: 1,
+              },
+            }}
+            initial={{
+              y: -30,
+            }}
+            className="font-bold text-[35px] h-[80px] flex justify-center sm:text-[40px] leading-[45px] sm:leading-[50px] text-center text-white"
+          >
             My Bookings
-          </h4>
-          <form
+          </motion.h4>
+          <motion.form
+            whileInView={{
+              y: 0,
+              transition: {
+                duration: 1,
+              },
+            }}
+            initial={{
+              y: -30,
+            }}
             onSubmit={(e) => {
               e.preventDefault();
               if (
@@ -155,7 +176,7 @@ export default ({ component }) => {
                     .removeAttribute("disabled");
                 }}
                 aria-label="Search"
-                className={`focus:outline-white flex justify-center items-center cursor-pointer text-center tracking-[0.02em] font-medium rounded-[8px] bg-danger leading-[24px] text-base w-[177px] h-[50px] text-white`}
+                className={`focus:outline-white itemsToGetHoverEffect flex justify-center items-center cursor-pointer text-center tracking-[0.02em] font-medium rounded-[8px] bg-danger leading-[24px] text-base w-[177px] h-[50px] text-white`}
               >
                 Reset
               </div>
@@ -163,7 +184,7 @@ export default ({ component }) => {
               <button
                 type="submit"
                 aria-label="Search"
-                className={` focus:outline-white pl-6 relative text-center tracking-[0.02em] font-medium rounded-[8px] bg-[var(--color-primary)] leading-[24px] text-base w-[177px] h-[50px] text-white`}
+                className={` focus:outline-white itemsToGetHoverEffect pl-6 relative text-center tracking-[0.02em] font-medium rounded-[8px] bg-[var(--color-primary)] leading-[24px] text-base w-[177px] h-[50px] text-white`}
               >
                 Search
                 <img
@@ -173,14 +194,23 @@ export default ({ component }) => {
                 />
               </button>
             )}
-          </form>
+          </motion.form>
         </>
       ) : (
         <>
           <div
             className={`absolute top-0 -z-10 w-[100%] rounded-b-[16px] ${styles.coloredBox2}`}
           ></div>
-          <form
+          <motion.form
+            whileInView={{
+              y: 0,
+              transition: {
+                duration: 1,
+              },
+            }}
+            initial={{
+              y: -30,
+            }}
             onSubmit={(e) =>
               fetchMedicalCenters(e, selectedState, selectedCity)
             }
@@ -288,7 +318,7 @@ export default ({ component }) => {
               aria-label="Search"
               className={`relative ${
                 btnLoadingContent === "Search" ? "pl-5" : "pl-0"
-              }  focus:outline-white font-medium flex justify-center leading-[24px] tracking-[0.02em] items-center text-center rounded-[8px] bg-[var(--color-primary)] text-base w-[228px] h-[50px] text-white`}
+              }  focus:outline-white itemsToGetHoverEffect font-medium flex justify-center leading-[24px] tracking-[0.02em] items-center text-center rounded-[8px] bg-[var(--color-primary)] text-base w-[228px] h-[50px] text-white`}
             >
               {btnLoadingContent}
               <img
@@ -298,7 +328,7 @@ export default ({ component }) => {
                 alt="Search"
               />
             </button>
-          </form>
+          </motion.form>
         </>
       )}
     </div>

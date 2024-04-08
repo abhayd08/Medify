@@ -4,7 +4,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/mousewheel";
 import "swiper/css/keyboard";
-import { Mousewheel, Keyboard } from "swiper/modules";
 import MedifyContext from "../../Contexts/MedifyContext";
 import ConfirmBoooking from "./ConfirmBoooking";
 import { enqueueSnackbar } from "notistack";
@@ -12,18 +11,12 @@ import { motion } from "framer-motion";
 
 export default ({ medicalCenterData, visibleBookingCenter }) => {
   const {
-    selectedSlot,
     setSelectedSlot,
     selectedDate,
     setSelectedDate,
     bookings,
-    setBookings,
-    isOpen,
     onOpen,
-    onOpenChange,
-    alertType,
     setAlertType,
-    bookingToRemove,
     dates,
     setDates,
     setBookingToRemove,
@@ -80,14 +73,14 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
       ...prevDates,
       {
         date: currentDate,
-        numberOfSlotsAvailable: 0,
+        numberOfSlotsAvailable: 18,
         id: "day1",
       },
     ]);
 
     setSelectedDate({
       date: currentDate,
-      numberOfSlotsAvailable: 0,
+      numberOfSlotsAvailable: 18,
       id: "day1",
     });
 
@@ -135,11 +128,11 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
   }, []);
 
   const checkSlotAvailability = (date, slot) => {
-    const currentHour = date?.date.getHours();
-    const currentMinutes = date?.date.getMinutes();
+    const currentHour = date?.date?.getHours();
+    const currentMinutes = date?.date?.getMinutes();
 
-    const [slotTime, period] = slot.timing.split(" ");
-    const [slotHour, slotMinutes] = slotTime.split(":").map(Number);
+    const [slotTime, period] = slot?.timing?.split(" ");
+    const [slotHour, slotMinutes] = slotTime?.split(":").map(Number);
 
     const adjustedSlotHour =
       period === "AM"
@@ -162,63 +155,80 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
     return isSlotAvailable;
   };
 
-  useEffect(() => {
-    slotsAvailable[0].morning.map((slot) => {
-      if (
-        checkSlotAvailability(dates[0], slot) &&
-        dates[0].numberOfSlotsAvailable <= slotsAvailable[0].morning.length &&
-        selectedDate.numberOfSlotsAvailable <= slotsAvailable[0].morning.length
-      ) {
-        setDates((prevDates) => {
-          let datesData = [...prevDates];
-          datesData[0].numberOfSlotsAvailable += 1;
-          return datesData;
-        });
-        setSelectedDate((prevDate) => {
-          let dateData = { ...prevDate };
-          dateData.numberOfSlotsAvailable += 1;
-          return dateData;
-        });
-      }
-    });
-    slotsAvailable[0].afternoon.map((slot) => {
-      if (
-        checkSlotAvailability(dates[0], slot) &&
-        dates[0].numberOfSlotsAvailable <= slotsAvailable[0].afternoon.length &&
-        selectedDate.numberOfSlotsAvailable <=
-          slotsAvailable[0].afternoon.length
-      ) {
-        setDates((prevDates) => {
-          let datesData = [...prevDates];
-          datesData[0].numberOfSlotsAvailable += 1;
-          return datesData;
-        });
-        setSelectedDate((prevDate) => {
-          let dateData = { ...prevDate };
-          dateData.numberOfSlotsAvailable += 1;
-          return dateData;
-        });
-      }
-    });
-    slotsAvailable[0].evening.map((slot) => {
-      if (
-        checkSlotAvailability(dates[0], slot) &&
-        dates[0].numberOfSlotsAvailable <= slotsAvailable[0].evening.length &&
-        selectedDate.numberOfSlotsAvailable <= slotsAvailable[0].evening.length
-      ) {
-        setDates((prevDates) => {
-          let datesData = [...prevDates];
-          datesData[0].numberOfSlotsAvailable += 1;
-          return datesData;
-        });
-        setSelectedDate((prevDate) => {
-          let dateData = { ...prevDate };
-          dateData.numberOfSlotsAvailable += 1;
-          return dateData;
-        });
-      }
-    });
-  }, [slotsAvailable, dates]);
+  // useEffect(() => {
+  //   slotsAvailable[0].morning.map((slot) => {
+  //     if (
+  //       checkSlotAvailability(dates[0], slot) &&
+  //       dates[0].numberOfSlotsAvailable <=
+  //         slotsAvailable[0].morning.length +
+  //           slotsAvailable[0].afternoon.length +
+  //           slotsAvailable[0].evening.length &&
+  //       selectedDate.numberOfSlotsAvailable <=
+  //         slotsAvailable[0].morning.length +
+  //           slotsAvailable[0].afternoon.length +
+  //           slotsAvailable[0].evening.length
+  //     ) {
+  //       setDates((prevDates) => {
+  //         let datesData = [...prevDates];
+  //         datesData[0].numberOfSlotsAvailable += 1;
+  //         return datesData;
+  //       });
+  //       setSelectedDate((prevDate) => {
+  //         let dateData = { ...prevDate };
+  //         dateData.numberOfSlotsAvailable += 1;
+  //         return dateData;
+  //       });
+  //     }
+  //   });
+  //   slotsAvailable[0].afternoon.map((slot) => {
+  //     if (
+  //       checkSlotAvailability(dates[0], slot) &&
+  //       dates[0].numberOfSlotsAvailable <=
+  //         slotsAvailable[0].morning.length +
+  //           slotsAvailable[0].afternoon.length +
+  //           slotsAvailable[0].evening.length &&
+  //       selectedDate.numberOfSlotsAvailable <=
+  //         slotsAvailable[0].morning.length +
+  //           slotsAvailable[0].afternoon.length +
+  //           slotsAvailable[0].evening.length
+  //     ) {
+  //       setDates((prevDates) => {
+  //         let datesData = [...prevDates];
+  //         datesData[0].numberOfSlotsAvailable += 1;
+  //         return datesData;
+  //       });
+  //       setSelectedDate((prevDate) => {
+  //         let dateData = { ...prevDate };
+  //         dateData.numberOfSlotsAvailable += 1;
+  //         return dateData;
+  //       });
+  //     }
+  //   });
+  //   slotsAvailable[0].evening.map((slot) => {
+  //     if (
+  //       checkSlotAvailability(dates[0], slot) &&
+  //       dates[0].numberOfSlotsAvailable <=
+  //         slotsAvailable[0].morning.length +
+  //           slotsAvailable[0].afternoon.length +
+  //           slotsAvailable[0].evening.length &&
+  //       selectedDate.numberOfSlotsAvailable <=
+  //         slotsAvailable[0].morning.length +
+  //           slotsAvailable[0].afternoon.length +
+  //           slotsAvailable[0].evening.length
+  //     ) {
+  //       setDates((prevDates) => {
+  //         let datesData = [...prevDates];
+  //         datesData[0].numberOfSlotsAvailable += 1;
+  //         return datesData;
+  //       });
+  //       setSelectedDate((prevDate) => {
+  //         let dateData = { ...prevDate };
+  //         dateData.numberOfSlotsAvailable += 1;
+  //         return dateData;
+  //       });
+  //     }
+  //   });
+  // }, [dates, slotsAvailable]);
 
   const isSlotAlreadyBookedFn = (bookings, slot, medicalCenterData) => {
     let isSlotAlreadyBooked = false;
@@ -250,25 +260,25 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
       whileInView={{
         y: 0,
         transition: {
-          duration: 0.35,
+          duration: 1,
         },
       }}
       initial={{
         y: -30,
       }}
-      className="border-t-[1px] w-[786px] fixedWidthContainers max-w-[95vw] mx-auto rounded-b-[15px] pb-[5px] border-[#efeff1]"
+      className="border-t-[1px] w-[786px] fixedWidthContainers max-w-[95vw] mx-auto rounded-b-[15px] pb-[6px] border-[#efeff1]"
     >
       <div className="bg-[#00A500] h-[5.25px] mx-auto w-[44px] -mt-[0.8px] rounded-[3.5px]"></div>
       <div className="mt-[20px] relative">
         <div
           onClick={goToPrevSlide}
-          className="absolute cursor-pointer top-1 z-20 left-0 sm:left-0"
+          className={`absolute itemsToGetHoverEffect cursor-pointer top-1 z-20 left-0 sm:left-0`}
         >
           <img src="/assets/prev.png" alt="Previous" />
         </div>
         <div
           onClick={goToNextSlide}
-          className="absolute cursor-pointer top-1 z-20 right-0 sm:right-0"
+          className="absolute itemsToGetHoverEffect cursor-pointer top-1 z-20 right-0 sm:right-0"
         >
           <img src="/assets/next.png" alt="Next" />
         </div>
@@ -331,14 +341,14 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
           })}
         </Swiper>
       </div>
-      <div className="py-[20px] fixedWidthContainers w-[95%] pl-5 mx-auto flex flex-wrap items-center border-b-[1px] border-solid border-[#F0F0F5] gap-[4px] gap-y-3">
+      <div className="py-[20px] w-[95%] px-5 mx-auto flex flex-wrap items-center border-b-[1px] border-solid border-[#F0F0F5] gap-[4px] gap-y-2">
         <div className="py-[13.5px] w-[110px] font-normal text-[14px] text-[#414146] leading-[19.6px]">
           Morning
         </div>
-        <div className="flex gap-[31px] gap-y-[25px] flex-wrap">
+        <div className="flex gap-[20px] sm:gap-[31px] sm:gap-y-[25px] gap-y-[20px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
-              {slotsAvailable[0].morning.map((slot) => {
+              {slotsAvailable[0]?.morning?.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
 
@@ -371,7 +381,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
                         : isSlotAlreadyBooked
                         ? "bg-[#2AA7FF] text-white border-white cursor-default"
                         : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
-                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                    } flex justify-center itemsToGetHoverEffect items-center rounded-[3px] text-[12px] sm:text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[74px] sm:w-[84px]`}
                   >
                     {slot.timing}
                   </div>
@@ -419,7 +429,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
                         : isSlotAlreadyBooked
                         ? "bg-[#2AA7FF] text-white border-white cursor-default"
                         : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
-                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                    } flex justify-center items-center itemsToGetHoverEffect rounded-[3px] text-[12px] sm:text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[74px] sm:w-[84px]`}
                   >
                     {slot.timing}
                   </div>
@@ -429,16 +439,17 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
           )}
         </div>
       </div>
-      <div className="py-[20px] w-[95%] mx-auto pl-5 flex flex-wrap items-center border-b-[1px] border-solid border-[#F0F0F5] gap-[4px] gap-y-2">
-        <div className="py-[13.5px] w-[110px] font-normal text-[14px] text-[#414146] leading-[19.6px]">
+      <div className="py-[20px] w-[95%] mx-auto px-5 flex flex-wrap items-center border-b-[1px] border-solid border-[#F0F0F5] gap-[4px] gap-y-2">
+        <div className="py-[13.5px] itemsToGetHoverEffect w-[110px] font-normal text-[14px] text-[#414146] leading-[19.6px]">
           Afternoon
         </div>
-        <div className="flex gap-[31px] gap-y-[25px] flex-wrap">
+        <div className="flex gap-[20px] sm:gap-[31px] sm:gap-y-[25px] gap-y-[20px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
               {slotsAvailable[0].afternoon.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
+
                 return (
                   <div
                     onClick={() => {
@@ -468,7 +479,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
                         : isSlotAlreadyBooked
                         ? "bg-[#2AA7FF] text-white border-white cursor-default"
                         : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
-                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                    } flex justify-center itemsToGetHoverEffect items-center rounded-[3px] text-[12px] sm:text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[74px] sm:w-[84px]`}
                   >
                     {slot.timing}
                   </div>
@@ -517,7 +528,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
                         : isSlotAlreadyBooked
                         ? "bg-[#2AA7FF] text-white border-white cursor-default"
                         : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
-                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                    } flex justify-center itemsToGetHoverEffect items-center rounded-[3px] text-[12px] sm:text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[74px] sm:w-[84px]`}
                   >
                     {slot.timing}
                   </div>
@@ -527,16 +538,17 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
           )}
         </div>
       </div>
-      <div className="py-[20px] w-[95%] mx-auto pl-5 flex flex-wrap items-center gap-[4px] gap-y-2">
+      <div className="py-[20px] w-[95%] mx-auto px-5 flex flex-wrap items-center gap-[4px] gap-y-2">
         <div className="py-[13.5px] w-[110px] font-normal text-[14px] text-[#414146] leading-[19.6px]">
           Evening
         </div>
-        <div className="flex gap-[31px] gap-y-[25px] flex-wrap">
+        <div className="flex gap-[20px] sm:gap-[31px] sm:gap-y-[25px] gap-y-[20px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
               {slotsAvailable[0].evening.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
+
                 return (
                   <div
                     onClick={() => {
@@ -570,7 +582,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
                         : isSlotAlreadyBooked
                         ? "bg-[#2AA7FF] text-white border-white cursor-default"
                         : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
-                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                    } flex justify-center itemsToGetHoverEffect items-center rounded-[3px] text-[12px] sm:text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[74px] sm:w-[84px]`}
                   >
                     {slot.timing}
                   </div>
@@ -619,7 +631,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
                         : isSlotAlreadyBooked
                         ? "bg-[#2AA7FF] text-white border-white cursor-default"
                         : "border-[#9CA3AF] cursor-default text-[#9CA3AF]"
-                    } flex justify-center items-center rounded-[3px] text-[14px] leading-[19.6px] font-normal text-center py-[7.25px] w-[84px]`}
+                    } flex justify-center itemsToGetHoverEffect items-center rounded-[3px] text-[12px] sm:text-[14px] leading-[19.6px] font-normal w-[74px] text-center py-[7.25px] sm:w-[84px]`}
                   >
                     {slot.timing}
                   </div>

@@ -88,7 +88,7 @@ export default () => {
         <div className="flex justify-center flex-wrap gap-y-[45px] items-center gap-[24px]">
           <div className="mx-auto max-w-[98vw] fixedWidthContainers w-[1300px]">
             <Swiper
-              className="pb-16"
+              className="newsSwiper"
               modules={[Autoplay, Pagination]}
               autoplay={{
                 delay: 2500,

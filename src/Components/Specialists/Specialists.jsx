@@ -35,7 +35,7 @@ export default () => {
         </h5>
         <div className="mx-auto fixedWidthContainers max-w-[98vw] w-[1300px]">
           <Swiper
-            className="pb-20"
+            className="specialistsSwiper"
             spaceBetween={15}
             modules={[Autoplay, Pagination]}
             autoplay={{
