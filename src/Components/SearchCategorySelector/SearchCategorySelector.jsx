@@ -16,6 +16,7 @@ export default () => {
     setSelectedCity,
     loadingContent,
     setLoadingContent,
+    medicalCentersData,
     setMedicalCentersData,
     setSearchedLocation,
   } = useContext(MedifyContext);
@@ -224,23 +225,45 @@ export default () => {
               alt="Search"
             />
           </div>
-          <button
-            type="submit"
-            id="fetchMedicalCentersBtn"
-            aria-label="Search"
-            role="button"
-            className={`relative ${
-              btnLoadingContent === "Search" ? "pl-5" : "pl-0"
-            }  focus:outline-white flex justify-center itemsToGetHoverEffect items-center text-center rounded-[8px] bg-[var(--color-primary)] text-sm w-[125px] h-[50px] text-white`}
-          >
-            {btnLoadingContent}
-            <img
-              id="btnSearchIcon"
-              className="absolute left-4 w-5 h-5 top-[50%] translate-y-[-50%]"
-              src="/assets/searchIcon2.png"
-              alt="Search"
-            />
-          </button>
+          <div className="flex justify-center items-center gap-4">
+            <button
+              type="submit"
+              id="fetchMedicalCentersBtn"
+              aria-label="Search"
+              role="button"
+              className={`relative ${
+                btnLoadingContent === "Search" ? "pl-5" : "pl-0"
+              }  focus:outline-white flex justify-center itemsToGetHoverEffect items-center text-center rounded-[8px] bg-[var(--color-primary)] text-sm w-[125px] h-[50px] text-white`}
+            >
+              {btnLoadingContent}
+              <img
+                id="btnSearchIcon"
+                className="absolute left-4 w-5 h-5 top-[50%] translate-y-[-50%]"
+                src="/assets/searchIcon2.png"
+                alt="Search"
+              />
+            </button>
+            {medicalCentersData.length > 0 ? (
+              <div
+                onClick={() => {
+                  setSelectedState("State");
+                  setSelectedCity("City");
+                  setSearchedLocation(null);
+                  setCities([]);
+                  setMedicalCentersData([]);
+                }}
+                className="text-danger cursor-pointer itemsToGetHoverEffect font-bold"
+              >
+                <img
+                  src="/assets/cancel.png"
+                  className="rounded-full w-7"
+                  alt="Cancel"
+                />
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </form>
         <div className="flex flex-col gap-[25px] px-2">
           <h4 className="text-center font-medium text-[20px] leading-30px] tracking-[0.02em] text-[#102851]">

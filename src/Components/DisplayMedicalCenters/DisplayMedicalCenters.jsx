@@ -89,7 +89,18 @@ export default () => {
             {selectedNavItem === "myBookings" ? (
               ""
             ) : (
-              <div className="flex flex-col px-3 gap-3">
+              <motion.div
+                whileInView={{
+                  y: 0,
+                  transition: {
+                    duration: 1,
+                  },
+                }}
+                initial={{
+                  y: -20,
+                }}
+                className="flex flex-col px-3 gap-3"
+              >
                 <h4 className="font-medium text-2xl leading-[36px] text-black">
                   {medicalCentersData?.length} medical{" "}
                   {medicalCentersData?.length === 1 ? "center" : "centers"}{" "}
@@ -106,12 +117,21 @@ export default () => {
                     details
                   </span>
                 </div>
-              </div>
+              </motion.div>
             )}
             <div className="max-w-[98vw] fixedWidthContainers w-[786px] mx-auto gap-[25px] flex flex-col">
               {currentItems.map((medicalCenterData) => {
                 return (
-                  <div
+                  <motion.div
+                    whileInView={{
+                      y: 0,
+                      transition: {
+                        duration: 1,
+                      },
+                    }}
+                    initial={{
+                      y: -20,
+                    }}
                     key={
                       medicalCenterData?.["Provider ID"] ||
                       medicalCenterData?.id
@@ -271,33 +291,55 @@ export default () => {
                     ) : (
                       ""
                     )}
-                  </div>
+                  </motion.div>
                 );
               })}
               {(selectedNavItem !== "myBookings" && currentItems.length < 1) ||
               (selectedNavItem === "myBookings" &&
                 currentItems.length < 1 &&
                 searchedHospital !== null) ? (
-                <h6 className="rounded-[15px] px-2 font-medium  py-[40px] bg-white">
+                <motion.h6
+                  whileInView={{
+                    y: 0,
+                    transition: {
+                      duration: 1,
+                    },
+                  }}
+                  initial={{
+                    y: -20,
+                  }}
+                  className="rounded-[15px] px-2 font-medium py-[40px] bg-white"
+                >
                   Oops! We couldn't find any matching search results.
                   <span className="text-[var(--color-primary)]">
                     {" "}
                     Please try refining your search criteria and try again.
                   </span>
-                </h6>
+                </motion.h6>
               ) : (
                 ""
               )}
               {selectedNavItem === "myBookings" &&
               currentItems.length < 1 &&
               searchedHospital === null ? (
-                <h6 className="rounded-[15px] px-2 font-medium  py-[40px] bg-white">
+                <motion.h6
+                  whileInView={{
+                    y: 0,
+                    transition: {
+                      duration: 1,
+                    },
+                  }}
+                  initial={{
+                    y: -20,
+                  }}
+                  className="rounded-[15px] px-2 font-medium  py-[40px] bg-white"
+                >
                   Looks like you haven't made any bookings yet.
                   <span className="text-[var(--color-primary)]">
                     {" "}
                     Start exploring and book your first appointment today!
                   </span>
-                </h6>
+                </motion.h6>
               ) : (
                 ""
               )}

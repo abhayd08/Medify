@@ -101,8 +101,17 @@ export default ({ component }) => {
   };
 
   return (
-    <div
-      className={`px-2 relative gap-[60px] animate__animated animate__bounceInDown gap-y-0 flex justify-center items-center ${
+    <motion.div
+      whileInView={{
+        y: 0,
+        transition: {
+          duration: 1,
+        },
+      }}
+      initial={{
+        y: -30,
+      }}
+      className={`px-2 relative gap-[60px] gap-y-0 flex justify-center items-center ${
         selectedNavItem !== null &&
         selectedNavItem !== "myBookings" &&
         medicalCentersData.length < 1
@@ -113,7 +122,7 @@ export default ({ component }) => {
       {selectedNavItem === "myBookings" ? (
         <>
           <div
-            className={`absolute top-0 -z-10 w-[100%] rounded-b-[16px] ${styles.coloredBox}`}
+            className={`absolute top-0 w-[100%] rounded-b-[16px] ${styles.coloredBox}`}
           ></div>
           <motion.h4
             whileInView={{
@@ -123,9 +132,9 @@ export default ({ component }) => {
               },
             }}
             initial={{
-              y: -30,
+              y: -20,
             }}
-            className="font-bold text-[35px] h-[80px] flex justify-center sm:text-[40px] leading-[45px] sm:leading-[50px] text-center text-white"
+            className="font-bold z-10 text-[35px] h-[80px] flex justify-center sm:text-[40px] leading-[45px] sm:leading-[50px] text-center text-white"
           >
             My Bookings
           </motion.h4>
@@ -137,7 +146,7 @@ export default ({ component }) => {
               },
             }}
             initial={{
-              y: -30,
+              y: -20,
             }}
             onSubmit={(e) => {
               e.preventDefault();
@@ -157,7 +166,7 @@ export default ({ component }) => {
                 });
               }
             }}
-            className={`py-[27px] flex justify-center items-center gap-[20px] rounded-[15px] bg-[#FFFFFF] px-[20px] max-w-[96.5vw] w-[780px] ${styles.form}`}
+            className={`py-[27px] z-10 flex justify-center items-center gap-[20px] rounded-[15px] bg-[#FFFFFF] px-[20px] max-w-[96.5vw] w-[780px] ${styles.form}`}
           >
             <input
               placeholder="Search By Hospital"
@@ -199,7 +208,7 @@ export default ({ component }) => {
       ) : (
         <>
           <div
-            className={`absolute top-0 -z-10 w-[100%] rounded-b-[16px] ${styles.coloredBox2}`}
+            className={`absolute top-0 w-[100%] rounded-b-[16px] ${styles.coloredBox2}`}
           ></div>
           <motion.form
             whileInView={{
@@ -209,12 +218,12 @@ export default ({ component }) => {
               },
             }}
             initial={{
-              y: -30,
+              y: -20,
             }}
             onSubmit={(e) =>
               fetchMedicalCenters(e, selectedState, selectedCity)
             }
-            className={`py-[27px] flex justify-center items-center gap-[20px] rounded-[15px] bg-[#FFFFFF] px-[10px] max-w-[96.5vw] w-[1166px] ${styles.form2}`}
+            className={`py-[27px] z-10 flex justify-center items-center gap-[20px] rounded-[15px] bg-[#FFFFFF] px-[10px] max-w-[96.5vw] w-[1166px] ${styles.form2}`}
           >
             <div
               className={`relative ${
@@ -331,6 +340,6 @@ export default ({ component }) => {
           </motion.form>
         </>
       )}
-    </div>
+    </motion.div>
   );
 };

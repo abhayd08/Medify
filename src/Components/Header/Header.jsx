@@ -67,7 +67,7 @@ export default () => {
             <div
               onClick={() =>
                 enqueueSnackbar("Feature yet to be implemented.", {
-                  variant: "warning",
+                  variant: "info",
                 })
               }
               className={`hidden md:flex ${styles.navItems} cursor-pointer`}
@@ -77,7 +77,7 @@ export default () => {
             <div
               onClick={() =>
                 enqueueSnackbar("Feature yet to be implemented.", {
-                  variant: "warning",
+                  variant: "info",
                 })
               }
               className={`hidden lg:flex ${styles.navItems} cursor-pointer`}
@@ -87,7 +87,7 @@ export default () => {
             <div
               onClick={() =>
                 enqueueSnackbar("Feature yet to be implemented.", {
-                  variant: "warning",
+                  variant: "info",
                 })
               }
               className={`hidden xl:flex ${styles.navItems} cursor-pointer`}
@@ -97,7 +97,7 @@ export default () => {
             <div
               onClick={() =>
                 enqueueSnackbar("Feature yet to be implemented.", {
-                  variant: "warning",
+                  variant: "info",
                 })
               }
               className={`hidden xl:flex ${styles.navItems} cursor-pointer`}

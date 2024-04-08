@@ -14,7 +14,6 @@ import DownloadSection from "../DownloadSection/DownloadSection";
 import Footer from "../Footer/Footer";
 import SubHeader from "../SubHeader/SubHeader";
 import { useDisclosure } from "@nextui-org/react";
-import "animate.css";
 import OffersSection from "../OffersSection/OffersSection";
 import Specialisations from "../Specialisations/Specialisations";
 import Specialists from "../Specialists/Specialists";
@@ -54,18 +53,17 @@ const Home = () => {
         );
         console.log(error);
       } finally {
-        // setSelectedState("State");
-        // setSelectedCity("City");
-        // setCities([]);
-        // setSearchedLocation(null);
-        // setMedicalCentersData([]);
-        // setSearchedHospital(null);
-        // setAlertType(null);
-        // setSelectedNavItem(null);
-        // setBookingToRemove(null);
-        // setDates([]);
-        // setSelectedDate({});
-        // setSelectedSlot(null);
+        setSelectedState("State");
+        setSelectedCity("City");
+        setCities([]);
+        setSearchedLocation(null);
+        setMedicalCentersData([]);
+        setSearchedHospital(null);
+        setAlertType(null);
+        setSelectedNavItem(null);
+        setBookingToRemove(null);
+        setDates([]);
+        setSelectedSlot(null);
         setLoadingContent("");
       }
     })();

@@ -6,7 +6,14 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <SnackbarProvider maxSnack={2} autoHideDuration={3000} />
+    <SnackbarProvider
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      maxSnack={2}
+      autoHideDuration={2500}
+    />
     <App />
   </BrowserRouter>
 );

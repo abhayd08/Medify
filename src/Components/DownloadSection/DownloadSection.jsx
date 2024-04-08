@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { enqueueSnackbar } from "notistack";
 
 export default () => {
   return (
@@ -53,6 +54,11 @@ export default () => {
               />
             </div>
             <button
+              onClick={() =>
+                enqueueSnackbar("Feature yet to be implemented.", {
+                  variant: "info",
+                })
+              }
               className="text-white bg-[#2AA8FF] rounded-[8px] w-[121px] h-[48px] text-center font-medium tracking-[0.02em] text-base"
               type="submit"
             >
@@ -61,11 +67,21 @@ export default () => {
           </form>
           <div className="flex justify-center md:ml-20 mt-[50px] items-center flex-wrap pb-[70px] gap-[26px]">
             <img
+              onClick={() =>
+                enqueueSnackbar("Feature yet to be implemented.", {
+                  variant: "info",
+                })
+              }
               className="cursor-pointer w-[200px] sm:w-[224px]"
               src="/assets/googlePlay.png"
               alt="Google Play"
             />
             <img
+              onClick={() =>
+                enqueueSnackbar("Feature yet to be implemented.", {
+                  variant: "info",
+                })
+              }
               className="cursor-pointer w-[200px] sm:w-[224px]"
               src="/assets/appleStore.png"
               alt="Google Play"

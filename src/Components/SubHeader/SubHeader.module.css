@@ -8,7 +8,7 @@
 
 .coloredBox,
 .coloredBox2 {
-  background: linear-gradient(91.75deg, #2aa7ff 1.4%, #0c8ce6 100.57%);
+  background: linear-gradient(91.75deg, #2aa7ff 1.4%, #0c8ce6 100.57%) !important;
 }
 
 .form,

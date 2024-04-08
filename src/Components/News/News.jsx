@@ -5,6 +5,7 @@ import "swiper/css/mousewheel";
 import "swiper/css/keyboard";
 import { Autoplay, Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
+import { enqueueSnackbar } from "notistack";
 
 const newsArray = [
   {
@@ -73,7 +74,7 @@ export default () => {
           },
         }}
         initial={{
-          y: -50,
+          y: -40,
         }}
         className="flex justify-center items-center flex-col gap-[34.5px]"
       >
@@ -113,7 +114,14 @@ export default () => {
               {newsArray.map((news) => {
                 return (
                   <SwiperSlide key={news.id} className="px-1">
-                    <div className="cursor-pointer border-[1px] max-w-[363px] rounded-b-[8px] rounded-t-[8px] pb-[20px] border-[#00000012]">
+                    <div
+                      onClick={() =>
+                        enqueueSnackbar("Feature yet to be implemented.", {
+                          variant: "info",
+                        })
+                      }
+                      className="cursor-pointer border-[1px] max-w-[363px] rounded-b-[8px] rounded-t-[8px] pb-[20px] border-[#00000012]"
+                    >
                       <img
                         className="w-[363px] rounded-[8px]"
                         src={news.imgSrc}

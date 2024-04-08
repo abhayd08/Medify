@@ -1,5 +1,6 @@
 import styles from "./Specialisations.module.css";
 import { motion } from "framer-motion";
+import { enqueueSnackbar } from "notistack";
 
 const specialisations = [
   {
@@ -65,9 +66,14 @@ export default () => {
           {specialisations.map((specialisation) => {
             return (
               <div
+                onClick={() =>
+                  enqueueSnackbar("Feature yet to be implemented.", {
+                    variant: "info",
+                  })
+                }
                 key={specialisation.name}
                 style={{ boxShadow: "0px 34px 44px 0px #D5DBE470" }}
-                className="h-[180px] rounded-[10px] bg-[#FFFFFF] w-[270px] gap-4 flex flex-col justify-center items-center"
+                className="h-[180px] cursor-pointer rounded-[10px] bg-[#FFFFFF] w-[270px] gap-4 flex flex-col justify-center items-center"
               >
                 <img
                   className="w-[70px]"
