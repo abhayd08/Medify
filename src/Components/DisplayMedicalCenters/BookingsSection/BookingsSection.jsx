@@ -2,8 +2,6 @@ import { useEffect, useRef, useState, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/mousewheel";
-import "swiper/css/keyboard";
 import MedifyContext from "../../Contexts/MedifyContext";
 import ConfirmBoooking from "./ConfirmBoooking";
 import { enqueueSnackbar } from "notistack";
@@ -154,81 +152,6 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
 
     return isSlotAvailable;
   };
-
-  // useEffect(() => {
-  //   slotsAvailable[0].morning.map((slot) => {
-  //     if (
-  //       checkSlotAvailability(dates[0], slot) &&
-  //       dates[0].numberOfSlotsAvailable <=
-  //         slotsAvailable[0].morning.length +
-  //           slotsAvailable[0].afternoon.length +
-  //           slotsAvailable[0].evening.length &&
-  //       selectedDate.numberOfSlotsAvailable <=
-  //         slotsAvailable[0].morning.length +
-  //           slotsAvailable[0].afternoon.length +
-  //           slotsAvailable[0].evening.length
-  //     ) {
-  //       setDates((prevDates) => {
-  //         let datesData = [...prevDates];
-  //         datesData[0].numberOfSlotsAvailable += 1;
-  //         return datesData;
-  //       });
-  //       setSelectedDate((prevDate) => {
-  //         let dateData = { ...prevDate };
-  //         dateData.numberOfSlotsAvailable += 1;
-  //         return dateData;
-  //       });
-  //     }
-  //   });
-  //   slotsAvailable[0].afternoon.map((slot) => {
-  //     if (
-  //       checkSlotAvailability(dates[0], slot) &&
-  //       dates[0].numberOfSlotsAvailable <=
-  //         slotsAvailable[0].morning.length +
-  //           slotsAvailable[0].afternoon.length +
-  //           slotsAvailable[0].evening.length &&
-  //       selectedDate.numberOfSlotsAvailable <=
-  //         slotsAvailable[0].morning.length +
-  //           slotsAvailable[0].afternoon.length +
-  //           slotsAvailable[0].evening.length
-  //     ) {
-  //       setDates((prevDates) => {
-  //         let datesData = [...prevDates];
-  //         datesData[0].numberOfSlotsAvailable += 1;
-  //         return datesData;
-  //       });
-  //       setSelectedDate((prevDate) => {
-  //         let dateData = { ...prevDate };
-  //         dateData.numberOfSlotsAvailable += 1;
-  //         return dateData;
-  //       });
-  //     }
-  //   });
-  //   slotsAvailable[0].evening.map((slot) => {
-  //     if (
-  //       checkSlotAvailability(dates[0], slot) &&
-  //       dates[0].numberOfSlotsAvailable <=
-  //         slotsAvailable[0].morning.length +
-  //           slotsAvailable[0].afternoon.length +
-  //           slotsAvailable[0].evening.length &&
-  //       selectedDate.numberOfSlotsAvailable <=
-  //         slotsAvailable[0].morning.length +
-  //           slotsAvailable[0].afternoon.length +
-  //           slotsAvailable[0].evening.length
-  //     ) {
-  //       setDates((prevDates) => {
-  //         let datesData = [...prevDates];
-  //         datesData[0].numberOfSlotsAvailable += 1;
-  //         return datesData;
-  //       });
-  //       setSelectedDate((prevDate) => {
-  //         let dateData = { ...prevDate };
-  //         dateData.numberOfSlotsAvailable += 1;
-  //         return dateData;
-  //       });
-  //     }
-  //   });
-  // }, [dates, slotsAvailable]);
 
   const isSlotAlreadyBookedFn = (bookings, slot, medicalCenterData) => {
     let isSlotAlreadyBooked = false;

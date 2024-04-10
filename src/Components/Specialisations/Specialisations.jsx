@@ -38,13 +38,7 @@ const specialisations = [
 ];
 export default () => {
   return (
-    <div
-      className="pt-[56px] pb-[150px]"
-      style={{
-        background:
-          "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
-      }}
-    >
+    <div className="pt-[56px] pb-[150px] bg-gradient">
       <motion.div
         whileInView={{
           y: 0,
@@ -53,12 +47,12 @@ export default () => {
           },
         }}
         initial={{
-          y: -50,
+          y: -35,
         }}
         className="flex px-2 flex-col gap-[62px] justify-center items-center"
       >
         <h5
-          className={`font-semibold text-[48px] leading-[65px] text-center text-[#1B3C74] ${styles.heading}`}
+          className={`font-semibold text-[48px] leading-[62px] text-center text-[#1B3C74] ${styles.heading}`}
         >
           Find By Specialisation
         </h5>

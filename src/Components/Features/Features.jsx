@@ -2,13 +2,7 @@ import { motion } from "framer-motion";
 
 export default () => {
   return (
-    <div
-      className="pt-[65px] pb-[47px]"
-      style={{
-        background:
-          "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
-      }}
-    >
+    <div className="pt-[65px] pb-[47px] bg-gradient">
       <motion.div
         whileInView={{
           y: 0,
@@ -17,7 +11,7 @@ export default () => {
           },
         }}
         initial={{
-          y: -50,
+          y: -35,
         }}
         className="flex gap-[71px] justify-center items-center flex-wrap"
       >
@@ -26,7 +20,7 @@ export default () => {
           <h6 className="font-semibold text-base leading-[24px] text-[#2AA7FF]">
             HELPING PATIENTS FROM AROUND THE GLOBE!!
           </h6>
-          <h4 className="leading-[58px] mb-7 mt-3 text-[#1B3C74] font-semibold text-[48px]">
+          <h4 className="leading-[62px] mb-7 mt-3 text-[#1B3C74] font-semibold text-[48px]">
             Patient <span className="text-[#2AA7FF]">Caring</span>
           </h4>
           <div className="text-[#77829D] font-medium leading-[25px] max-w-[563px]">

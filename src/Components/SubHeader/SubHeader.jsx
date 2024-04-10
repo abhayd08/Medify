@@ -39,14 +39,14 @@ export default ({ component }) => {
       });
     } else {
       (async () => {
-        setBtnLoadingContent(
-          <CircularProgress aria-label="Loading..." color="secondary" />
-        );
-        document
-          .getElementById("fetchMedicalCentersBtn2")
-          .setAttribute("disabled", true);
-        document.getElementById("btn2SearchIcon").style.display = "none";
         try {
+          setBtnLoadingContent(
+            <CircularProgress aria-label="Loading..." color="secondary" />
+          );
+          document
+            .getElementById("fetchMedicalCentersBtn2")
+            .setAttribute("disabled", true);
+          document.getElementById("btn2SearchIcon").style.display = "none";
           const response = await axios.get(
             `https://meddata-backend.onrender.com/data?state=${selectedState}&city=${selectedCity}`
           );
@@ -55,7 +55,6 @@ export default ({ component }) => {
             selectedCity !== "City" ? selectedCity : selectedState
           );
         } catch (error) {
-          console.log(error);
           enqueueSnackbar(
             "There is an issue loading the medical centers. Please refresh the page or try again later.",
             { variant: "error" }
@@ -63,6 +62,7 @@ export default ({ component }) => {
           setSelectedCity("City");
           setMedicalCentersData([]);
           setSearchedLocation(null);
+          console.log(error);
         } finally {
           document
             .getElementById("fetchMedicalCentersBtn2")
@@ -109,7 +109,7 @@ export default ({ component }) => {
         },
       }}
       initial={{
-        y: -30,
+        y: -20,
       }}
       className={`px-2 relative gap-[60px] gap-y-0 flex justify-center items-center ${
         selectedNavItem !== null &&
@@ -132,7 +132,7 @@ export default ({ component }) => {
               },
             }}
             initial={{
-              y: -20,
+              y: -10,
             }}
             className="font-bold z-10 text-[35px] h-[80px] flex justify-center sm:text-[40px] leading-[45px] sm:leading-[50px] text-center text-white"
           >
@@ -146,7 +146,7 @@ export default ({ component }) => {
               },
             }}
             initial={{
-              y: -20,
+              y: -10,
             }}
             onSubmit={(e) => {
               e.preventDefault();
@@ -155,7 +155,7 @@ export default ({ component }) => {
                   .length > 0
               ) {
                 setSearchedHospital(
-                  document.getElementById("hospitalSearchInputBox").value
+                  document.getElementById("hospitalSearchInputBox").value.trim()
                 );
                 document
                   .getElementById("hospitalSearchInputBox")
@@ -218,7 +218,7 @@ export default ({ component }) => {
               },
             }}
             initial={{
-              y: -20,
+              y: -10,
             }}
             onSubmit={(e) =>
               fetchMedicalCenters(e, selectedState, selectedCity)

@@ -2,12 +2,7 @@ import { motion } from "framer-motion";
 
 export default () => {
   return (
-    <div
-      style={{
-        background:
-          "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
-      }}
-    >
+    <div className="bg-gradient">
       <motion.div
         whileInView={{
           y: 0,
@@ -16,7 +11,7 @@ export default () => {
           },
         }}
         initial={{
-          y: -60,
+          y: -45,
         }}
         className="flex heroSection max-w-[1200px] justify-center items-center gap-y-16 flex-wrap px-3 mx-auto pt-[26px] lg:pt-[20px] xl:pt-[10px]"
       >
@@ -44,7 +39,7 @@ export default () => {
                 searchCategorySelector.scrollIntoView({ behavior: "smooth" });
               }
             }}
-            className="w-[171px] itemsToGetHoverEffect h-[48px] rounded-[8px] mt-[22px] text-center bg-[#2AA8FF] text-white tracking-[0.02em] font-medium"
+            className="w-[171px] outline-0 border-0 itemsToGetHoverEffect h-[48px] rounded-[8px] mt-[22px] text-center bg-[#2AA8FF] text-white tracking-[0.02em] font-medium"
           >
             Find Centers
           </button>
@@ -53,7 +48,7 @@ export default () => {
           <img
             src="/assets/hero.png"
             className="w-[425px] heroImage xl:w-[525px] max-w-[91vw] h-auto"
-            alt="Hero-Image"
+            alt="Hero Image"
           />
           <div
             style={{ boxShadow: "6px 6px 12px 0px #1028511C" }}

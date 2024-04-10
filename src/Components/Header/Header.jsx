@@ -7,12 +7,7 @@ export default () => {
   const { selectedNavItem, setSelectedNavItem } = useContext(MedifyContext);
 
   return (
-    <header
-      style={{
-        background:
-          "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
-      }}
-    >
+    <header className="bg-gradient">
       <div className="py-[9px] font-normal px-2 text-xs sm:text-sm text-center text-[#FFFFFF] bg-[var(--color-primary)]">
         The health and well-being of our patients and their health care team
         will always be our priority, so we follow the best practices for

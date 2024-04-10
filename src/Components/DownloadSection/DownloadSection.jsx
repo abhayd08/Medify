@@ -3,13 +3,7 @@ import { enqueueSnackbar } from "notistack";
 
 export default () => {
   return (
-    <div
-      className="pt-[50px] pb-[13px] px-2"
-      style={{
-        background:
-          "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
-      }}
-    >
+    <div className="pt-[50px] pb-[13px] px-2 bg-gradient">
       <motion.div
         whileInView={{
           y: 0,
@@ -18,7 +12,7 @@ export default () => {
           },
         }}
         initial={{
-          y: -50,
+          y: -35,
         }}
         className="flex justify-center items-center flex-wrap gap-[30px] gap-y-10"
       >

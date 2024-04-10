@@ -41,7 +41,7 @@ export default () => {
           },
         }}
         initial={{
-          y: -50,
+          y: -35,
         }}
         className="flex flex-col justify-center items-center gap-[45px]"
       >

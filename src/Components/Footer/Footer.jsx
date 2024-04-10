@@ -12,7 +12,7 @@ export default () => {
           },
         }}
         initial={{
-          x: -20,
+          x: -10,
         }}
         className="flex justify-around mx-auto pt-[39px] w-[100%] max-w-[1300px] items-center gap-[200px] gap-y-[130px] flex-wrap"
       >
@@ -305,12 +305,12 @@ export default () => {
           },
         }}
         initial={{
-          y: -20,
+          y: -10,
         }}
         className="border-t-[1px] mx-auto w-[100%] max-w-[1143px] border-[#FFFFFF1A] pt-[30.5px]"
       >
         <h6 className="text-[#FFFFFF] leading-[23px] text-center xl:text-left sm:leading-[28px] font-normal text-sm sm:text-base">
-          Copyright ©2023 Surya Nursing Home.com. All Rights Reserved
+          Copyright ©2024 Surya Nursing Home.com. All Rights Reserved
         </h6>
       </motion.div>
     </div>

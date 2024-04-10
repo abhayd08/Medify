@@ -1,8 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/mousewheel";
-import "swiper/css/keyboard";
 import { Autoplay, Pagination } from "swiper/modules";
 import styles from "./OffersSection.module.css";
 import { motion } from "framer-motion";
@@ -29,7 +27,7 @@ export default () => {
           },
         }}
         initial={{
-          y: -50,
+          y: -35,
         }}
       >
         <Swiper

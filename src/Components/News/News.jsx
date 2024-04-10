@@ -1,8 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/mousewheel";
-import "swiper/css/keyboard";
 import { Autoplay, Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
 import { enqueueSnackbar } from "notistack";
@@ -74,7 +72,7 @@ export default () => {
           },
         }}
         initial={{
-          y: -40,
+          y: -35,
         }}
         className="flex justify-center items-center flex-col gap-[34.5px]"
       >

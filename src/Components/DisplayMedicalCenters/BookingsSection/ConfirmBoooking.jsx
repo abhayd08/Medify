@@ -8,26 +8,21 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  useDisclosure,
 } from "@nextui-org/react";
 import { enqueueSnackbar } from "notistack";
 
 export default function ({ medicalCenterData }) {
   const {
-    bookings,
     setBookings,
     selectedDate,
     selectedSlot,
     isOpen,
-    onOpen,
     onOpenChange,
     setSelectedSlot,
     alertType,
     setAlertType,
     bookingToRemove,
     setBookingToRemove,
-    dates,
-    setDates,
   } = useContext(MedifyContext);
 
   return (

@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         horizontal: "center",
       }}
       maxSnack={2}
-      autoHideDuration={2500}
+      autoHideDuration={2200}
     />
     <App />
   </BrowserRouter>

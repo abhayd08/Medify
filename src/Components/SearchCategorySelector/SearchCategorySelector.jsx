@@ -35,14 +35,14 @@ export default () => {
       });
     } else {
       (async () => {
-        setBtnLoadingContent(
-          <CircularProgress aria-label="Loading..." color="secondary" />
-        );
-        document
-          .getElementById("fetchMedicalCentersBtn")
-          .setAttribute("disabled", true);
-        document.getElementById("btnSearchIcon").style.display = "none";
         try {
+          setBtnLoadingContent(
+            <CircularProgress aria-label="Loading..." color="secondary" />
+          );
+          document
+            .getElementById("fetchMedicalCentersBtn")
+            .setAttribute("disabled", true);
+          document.getElementById("btnSearchIcon").style.display = "none";
           const response = await axios.get(
             `https://meddata-backend.onrender.com/data?state=${selectedState}&city=${selectedCity}`
           );
@@ -62,7 +62,6 @@ export default () => {
 
           return () => clearTimeout(timer);
         } catch (error) {
-          console.log(error);
           enqueueSnackbar(
             "There is an issue loading the medical centers. Please refresh the page or try again later.",
             { variant: "error" }
@@ -70,6 +69,7 @@ export default () => {
           setSelectedCity("City");
           setMedicalCentersData([]);
           setSearchedLocation(null);
+          console.log(error);
         } finally {
           document
             .getElementById("fetchMedicalCentersBtn")
@@ -109,13 +109,7 @@ export default () => {
 
   return (
     <div id="searchCategorySelector" className="relative">
-      <div
-        className="h-[70%] w-[100%] absolute top-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
-        }}
-      ></div>
+      <div className="h-[70%] w-[100%] absolute top-0 -z-10 bg-gradient"></div>
       <motion.div
         whileInView={{
           y: -2,
@@ -124,7 +118,7 @@ export default () => {
           },
         }}
         initial={{
-          y: -55,
+          y: -45,
         }}
         style={{ boxShadow: "6px 6px 35px 0px #1028511C" }}
         className="max-w-[1170px] flex flex-col gap-[70px] bg-white border-[#F0F0F0] border-[1px] rounded-[15px] py-[55px] mx-auto"
@@ -140,14 +134,11 @@ export default () => {
           >
             <select
               value={selectedState}
-              className="w-[100%] rounded-[8px] pl-14 focus:outline-[var(--color-primary)] h-[100%] bg-[#FAFBFE]"
+              className="w-[100%] border-[1px] border-solid border-[#F0F0F0] rounded-[8px] pl-14 focus:outline-[var(--color-primary)] h-[100%] bg-[#FAFBFE]"
               onChange={(e) => {
                 setSelectedState(e.target.value);
                 setCities([]);
                 fetchCities(e.target.value);
-              }}
-              style={{
-                border: "1px solid #F0F0F0",
               }}
             >
               <option className="text-gray-500" disabled value="State">
@@ -233,7 +224,7 @@ export default () => {
               role="button"
               className={`relative ${
                 btnLoadingContent === "Search" ? "pl-5" : "pl-0"
-              }  focus:outline-white flex justify-center itemsToGetHoverEffect items-center text-center rounded-[8px] bg-[var(--color-primary)] text-sm w-[125px] h-[50px] text-white`}
+              }  focus:outline-white border-0 outline-0 flex justify-center itemsToGetHoverEffect items-center text-center rounded-[8px] bg-[var(--color-primary)] text-sm w-[125px] h-[50px] text-white`}
             >
               {btnLoadingContent}
               <img
@@ -266,10 +257,10 @@ export default () => {
           </div>
         </form>
         <div className="flex flex-col gap-[25px] px-2">
-          <h4 className="text-center font-medium text-[20px] leading-30px] tracking-[0.02em] text-[#102851]">
+          <h4 className="text-center font-medium text-[20px] leading-[30px] tracking-[0.02em] text-[#102851]">
             You may be looking for
           </h4>
-          <div className="flex gap-[21px] flex-wrap justify-center items-center">
+          <div className="flex gap-[21px] flex-wrap justify-evenly items-center">
             <div className="w-[203px] bg-[#FAFBFE] h-[153px] rounded-[8px] flex flex-col gap-[15px] justify-center items-center">
               <img
                 src="/assets/doctor.png"

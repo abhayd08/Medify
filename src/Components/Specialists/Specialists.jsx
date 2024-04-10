@@ -1,8 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/mousewheel";
-import "swiper/css/keyboard";
 import { Autoplay, Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
 
@@ -26,11 +24,11 @@ export default () => {
           },
         }}
         initial={{
-          y: -50,
+          y: -35,
         }}
         className="max-w-[1300px] px-2 mx-auto flex flex-col gap-[65px] justify-center items-center"
       >
-        <h5 className="font-semibold text-[48px] leading-[67px] text-center text-[#1B3C74]">
+        <h5 className="font-semibold text-[48px] leading-[62px] text-center text-[#1B3C74]">
           Our Medical Specialist
         </h5>
         <div className="mx-auto fixedWidthContainers max-w-[98vw] w-[1300px]">

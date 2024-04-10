@@ -43,7 +43,6 @@ export default () => {
           .toLowerCase()
           .includes(searchedHospital.toLowerCase())
       );
-      console.log(matchingHospitals);
       setMaxPagesAllowed(Math.ceil(matchingHospitals.length / 5) || 1);
       setCurrentItems(matchingHospitals.slice(startingIndex, endingIndex));
     } else if (selectedNavItem === "myBookings" && searchedHospital === null) {
@@ -64,11 +63,7 @@ export default () => {
 
   return (
     <div
-      className="pt-[90px] pb-[120px]"
-      style={{
-        background:
-          "linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%)",
-      }}
+      className="pt-[90px] pb-[120px] bg-gradient"
       id="displayMedicalCenters"
     >
       <motion.div
@@ -79,7 +74,7 @@ export default () => {
           },
         }}
         initial={{
-          y: -65,
+          y: -50,
         }}
       >
         <div
@@ -97,7 +92,7 @@ export default () => {
                   },
                 }}
                 initial={{
-                  y: -20,
+                  y: -15,
                 }}
                 className="flex flex-col px-3 gap-3"
               >
@@ -130,7 +125,7 @@ export default () => {
                       },
                     }}
                     initial={{
-                      y: -20,
+                      y: -15,
                     }}
                     key={
                       medicalCenterData?.["Provider ID"] ||
@@ -226,10 +221,7 @@ export default () => {
                         ) : (
                           <div className="flex flex-col gap-[14px] justify-end mb-3 items-center">
                             <span className="text-[#01A400] text-[14px] font-medium">
-                              Available{" "}
-                              {dates[0]?.numberOfSlotsAvailable >= 1
-                                ? "Today"
-                                : ""}
+                              Available Today
                             </span>
                             <button
                               type="button"
@@ -306,7 +298,7 @@ export default () => {
                     },
                   }}
                   initial={{
-                    y: -20,
+                    y: -15,
                   }}
                   className="rounded-[15px] px-2 font-medium py-[40px] bg-white"
                 >
@@ -330,7 +322,7 @@ export default () => {
                     },
                   }}
                   initial={{
-                    y: -20,
+                    y: -15,
                   }}
                   className="rounded-[15px] px-2 font-medium  py-[40px] bg-white"
                 >
