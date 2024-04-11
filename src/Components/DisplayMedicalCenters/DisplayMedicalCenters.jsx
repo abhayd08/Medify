@@ -10,6 +10,7 @@ export default () => {
     medicalCentersData,
     selectedNavItem,
     bookings,
+    dates,
     searchedHospital,
   } = useContext(MedifyContext);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,6 +19,15 @@ export default () => {
   const [endingIndex, setEndingIndex] = useState(5);
   const [currentItems, setCurrentItems] = useState([]);
   const [visibleBookingCenter, setVisibleBookingCenter] = useState(null);
+  const [availability, setAvailability] = useState("Available Today");
+
+  useEffect(() => {
+    if (new Date().getHours() < 18) {
+      setAvailability("Available Today");
+    } else {
+      setAvailability("Available Tomorrow");
+    }
+  }, []);
 
   const toggleBookingSectionVisibility = (medicalCenterId) => {
     setVisibleBookingCenter((prevMedicalCenter) => {
@@ -220,8 +230,9 @@ export default () => {
                         ) : (
                           <div className="flex flex-col gap-[14px] justify-end mb-3 items-center">
                             <span className="text-[#01A400] text-[14px] font-medium">
-                              Available Today
+                              {availability}
                             </span>
+
                             <button
                               type="button"
                               aria-label="Book"
