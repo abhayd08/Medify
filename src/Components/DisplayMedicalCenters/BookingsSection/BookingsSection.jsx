@@ -160,8 +160,8 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
       if (
         booking.slot.id === slot.id &&
         booking.date.id === selectedDate.id &&
-        booking.medicalCenterData["Provider ID"] ===
-          medicalCenterData["Provider ID"]
+        booking.medicalCenterData?.["Provider ID"] ===
+          medicalCenterData?.["Provider ID"]
       ) {
         isSlotAlreadyBooked = true;
         bookingid = booking.id;
@@ -169,6 +169,60 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
     });
     return { isSlotAlreadyBooked, bookingid };
   };
+
+  useEffect(() => {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const currentMinutes = currentTime.getMinutes();
+
+    let adjustment = 0;
+
+    if (currentHour < 9 || (currentHour === 9 && currentMinutes < 30)) {
+      adjustment = 0;
+    } else if (currentHour === 9 && currentMinutes >= 30) {
+      adjustment = 1;
+    } else if (currentHour === 10 && currentMinutes < 30) {
+      adjustment = 2;
+    } else if (currentHour === 10 && currentMinutes >= 30) {
+      adjustment = 3;
+    } else if (currentHour === 11 && currentMinutes < 30) {
+      adjustment = 4;
+    } else if (currentHour === 11 && currentMinutes >= 30) {
+      adjustment = 5;
+    } else if (currentHour === 12 && currentMinutes < 30) {
+      adjustment = 6;
+    } else if (currentHour === 12 && currentMinutes >= 30) {
+      adjustment = 7;
+    } else if (currentHour === 13 && currentMinutes < 30) {
+      adjustment = 8;
+    } else if (currentHour === 13 && currentMinutes >= 30) {
+      adjustment = 9;
+    } else if (currentHour === 14 && currentMinutes < 30) {
+      adjustment = 10;
+    } else if (currentHour === 14 && currentMinutes >= 30) {
+      adjustment = 11;
+    } else if (currentHour === 15 && currentMinutes < 30) {
+      adjustment = 12;
+    } else if (currentHour === 15 && currentMinutes >= 30) {
+      adjustment = 13;
+    } else if (currentHour === 16 && currentMinutes < 30) {
+      adjustment = 14;
+    } else if (currentHour === 16 && currentMinutes >= 30) {
+      adjustment = 15;
+    } else if (currentHour === 17 && currentMinutes < 30) {
+      adjustment = 16;
+    } else if (currentHour === 17 && currentMinutes >= 30) {
+      adjustment = 17;
+    } else if (currentHour >= 18) {
+      adjustment = 18;
+    }
+
+    setDates((prevDates) => {
+      const updatedDates = [...prevDates];
+      updatedDates[0].numberOfSlotsAvailable -= adjustment;
+      return updatedDates;
+    });
+  }, []);
 
   const setDateFormat = (date) => {
     const weekday = date.toLocaleDateString("en-US", { weekday: "short" });
@@ -249,7 +303,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
                       ? "Today"
                       : setDateFormat(item.date)}
                   </span>
-                  {item.numberOfSlotsAvailable >= 1 ? (
+                  {item.numberOfSlotsAvailable > 0 ? (
                     <span className="font-normal text-[12px] leading-[16.8px] text-center text-[#01A400]">
                       {item.numberOfSlotsAvailable} slots available
                     </span>
@@ -483,7 +537,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
                         if (
                           !isSlotAlreadyBooked &&
                           visibleBookingCenter ===
-                            medicalCenterData["Provider ID"]
+                            medicalCenterData?.["Provider ID"]
                         ) {
                           setSelectedSlot(slot);
                           setAlertType("confirmation");

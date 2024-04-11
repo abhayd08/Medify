@@ -10,7 +10,6 @@ export default () => {
     medicalCentersData,
     selectedNavItem,
     bookings,
-    dates,
     searchedHospital,
   } = useContext(MedifyContext);
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +33,7 @@ export default () => {
   useEffect(() => {
     setCurrentPage(1);
     setVisibleBookingCenter(null);
-  }, [selectedNavItem]);
+  }, [selectedNavItem, searchedHospital]);
 
   useEffect(() => {
     if (selectedNavItem === "myBookings" && searchedHospital !== null) {
@@ -47,7 +46,7 @@ export default () => {
       setCurrentItems(matchingHospitals.slice(startingIndex, endingIndex));
     } else if (selectedNavItem === "myBookings" && searchedHospital === null) {
       setMaxPagesAllowed(Math.ceil(bookings.length / 5) || 1);
-      setCurrentItems(bookings.reverse().slice(startingIndex, endingIndex));
+      setCurrentItems(bookings.slice(startingIndex, endingIndex));
     } else {
       setMaxPagesAllowed(Math.ceil(medicalCentersData.length / 5) || 1);
       setCurrentItems(medicalCentersData.slice(startingIndex, endingIndex));

@@ -20,7 +20,7 @@ export default () => {
             <h2 className="font-medium text-[#102851] text-[28px] leading-[40px] sm:text-[31px] sm:leading-[48px]">
               Skip the travel! Find Online
             </h2>
-            <h3 className="font-bold text-[#000000] text-[52px] leading-[62px] sm:text-[56px] mt-3.5 sm:mt-2.5 sm:leading-[68px] tracking-[0.02em]">
+            <h3 className="font-bold text-[#000000] text-[52px] leading-[63px] sm:text-[56px] mt-3.5 sm:mt-2.5 sm:leading-[68px] tracking-[0.02em]">
               Medical <span className="text-[#2AA7FF]">Centers</span>
             </h3>
           </div>

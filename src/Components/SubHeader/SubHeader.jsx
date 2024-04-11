@@ -51,9 +51,20 @@ export default ({ component }) => {
             `https://meddata-backend.onrender.com/data?state=${selectedState}&city=${selectedCity}`
           );
           setMedicalCentersData(response.data);
+          const timer = setTimeout(() => {
+            const displayMedicalCentersElement = document.getElementById(
+              "displayMedicalCenters"
+            );
+            if (displayMedicalCentersElement) {
+              displayMedicalCentersElement.scrollIntoView({
+                behavior: "smooth",
+              });
+            }
+          }, 0);
           setSearchedLocation(
             selectedCity !== "City" ? selectedCity : selectedState
           );
+          return () => clearTimeout(timer);
         } catch (error) {
           enqueueSnackbar(
             "There is an issue loading the medical centers. Please refresh the page or try again later.",

@@ -39,7 +39,7 @@ export default function ({ medicalCenterData }) {
               y: 0,
               opacity: 1,
               transition: {
-                duration: 0.3,
+                duration: 0.7,
                 ease: "easeOut",
               },
             },
@@ -47,7 +47,7 @@ export default function ({ medicalCenterData }) {
               y: -35,
               opacity: 0,
               transition: {
-                duration: 0.2,
+                duration: 0.3,
                 ease: "easeIn",
               },
             },
@@ -107,13 +107,13 @@ export default function ({ medicalCenterData }) {
                       onPress={() => {
                         setBookings((prevBookings) => {
                           return [
-                            ...prevBookings,
                             {
                               id: `booking${prevBookings.length + 1}`,
                               date: selectedDate,
                               slot: selectedSlot,
                               medicalCenterData: medicalCenterData,
                             },
+                            ...prevBookings,
                           ];
                         });
                         setSelectedSlot(null);

@@ -36,7 +36,7 @@ A React-based web application that allows users to find medical centers in a spe
 
 ## Technologies
 
-#### Frontend: HTML, CSS, JavaScript, React, Tailwind CSS, Next UI, Swiper.js, Framer Motion
+#### Frontend: HTML, CSS, JavaScript, React.js, Tailwind CSS, Next UI, Swiper.js, Framer Motion
 
 #
 
