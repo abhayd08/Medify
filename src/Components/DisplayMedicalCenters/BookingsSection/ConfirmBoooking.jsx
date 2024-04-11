@@ -10,6 +10,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { enqueueSnackbar } from "notistack";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ({ medicalCenterData }) {
   const {
@@ -22,6 +23,7 @@ export default function ({ medicalCenterData }) {
     alertType,
     setAlertType,
     bookingToRemove,
+    bookings,
     setBookingToRemove,
   } = useContext(MedifyContext);
 
@@ -108,7 +110,7 @@ export default function ({ medicalCenterData }) {
                         setBookings((prevBookings) => {
                           return [
                             {
-                              id: `booking${prevBookings.length + 1}`,
+                              id: uuidv4(),
                               date: selectedDate,
                               slot: selectedSlot,
                               medicalCenterData: medicalCenterData,

@@ -367,7 +367,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
             </>
           ) : (
             <>
-              {slotsAvailable[0].morning.map((slot) => {
+              {slotsAvailable[0]?.morning?.map((slot) => {
                 const isSlotAvailable = checkSlotAvailability(dates[0], slot);
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
@@ -423,7 +423,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
         <div className="flex gap-[20px] sm:gap-[31px] sm:gap-y-[25px] gap-y-[20px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
-              {slotsAvailable[0].afternoon.map((slot) => {
+              {slotsAvailable[0]?.afternoon?.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
 
@@ -465,7 +465,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
             </>
           ) : (
             <>
-              {slotsAvailable[0].afternoon.map((slot) => {
+              {slotsAvailable[0]?.afternoon?.map((slot) => {
                 const isSlotAvailable = checkSlotAvailability(dates[0], slot);
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
@@ -522,7 +522,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
         <div className="flex gap-[20px] sm:gap-[31px] sm:gap-y-[25px] gap-y-[20px] flex-wrap">
           {selectedDate.id !== dates[0]?.id ? (
             <>
-              {slotsAvailable[0].evening.map((slot) => {
+              {slotsAvailable[0]?.evening?.map((slot) => {
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
 
@@ -568,7 +568,7 @@ export default ({ medicalCenterData, visibleBookingCenter }) => {
             </>
           ) : (
             <>
-              {slotsAvailable[0].evening.map((slot) => {
+              {slotsAvailable[0]?.evening?.map((slot) => {
                 const isSlotAvailable = checkSlotAvailability(dates[0], slot);
                 const { isSlotAlreadyBooked, bookingid } =
                   isSlotAlreadyBookedFn(bookings, slot, medicalCenterData);
