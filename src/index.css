@@ -61,9 +61,12 @@ body {
   position: relative !important;
 }
 
+.itemsToGetHoverEffect {
+  transition: 0.25s ease-in-out;
+}
+
 .itemsToGetHoverEffect:hover {
   transform: translateY(-0.1rem);
-  transition: 0.25s ease-in-out;
   opacity: 100 !important;
 }
 

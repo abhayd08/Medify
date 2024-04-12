@@ -284,7 +284,7 @@ export default () => {
                       </div>
                     </div>
                     {visibleBookingCenter ===
-                      medicalCenterData["Provider ID"] &&
+                      medicalCenterData?.["Provider ID"] &&
                     selectedNavItem !== "myBookings" ? (
                       <BookingsSection
                         visibleBookingCenter={visibleBookingCenter}

@@ -70,6 +70,18 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    setSelectedState("State");
+    setSelectedCity("City");
+    setCities([]);
+    setSearchedLocation(null);
+    setMedicalCentersData([]);
+    setSearchedHospital(null);
+    setAlertType(null);
+    setBookingToRemove(null);
+    setSelectedSlot(null);
+  }, [selectedNavItem]);
+
+  useEffect(() => {
     if (localStorage.getItem("bookings")) {
       setBookings(JSON.parse(localStorage.getItem("bookings")));
     } else {
